@@ -31,11 +31,28 @@ body {
     flex-shrink: 0;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-logo {
+    height: 40px;
+    /* Adjust size as needed */
+    width: auto;
+}
+
 .site-header h1 {
-    font-size: 1.25rem;
+    padding-top: 5px;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+    line-height: 1;
+    /* Fix vertical alignment */
+    transform: translateY(1px);
+    /* Comparison adjustment */
 }
 
 .app-container {
@@ -51,6 +68,11 @@ body {
     padding: 2rem;
     border-right: 1px solid var(--border-color);
     overflow-y: auto;
+    /* Scroll if content exceeds height */
+    height: 100%;
+    /* Fill the app-container height specifically */
+    /* Remove sticky if it was checking viewport anyway, or keep it if scrolling the main content page */
+    /* Assuming fixed sidebar design: */
 }
 
 .logo h1 {
@@ -129,6 +151,7 @@ body {
 .stats {
     font-size: 0.9rem;
     color: var(--text-secondary);
+    margin-left: 1rem;
 }
 
 .grid-container {
@@ -138,6 +161,11 @@ body {
     overflow-y: auto;
     padding-bottom: 2rem;
     padding-top: 5px;
+}
+
+.grid-container.text-view-mode {
+    display: block;
+    width: 100%;
 }
 
 /* Cards */
@@ -214,8 +242,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--sidebar-bg);
+    background: rgba(255, 255, 255, 0.2);
+    /* Visible track against dark backgrounds */
     border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 /* Tabs */
@@ -262,6 +295,10 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+h1 {
+    padding-top: 0px;
 }
 
 .section-h1 h2 {
@@ -328,13 +365,11 @@ body {
 .text-content {
     color: var(--text-secondary);
     line-height: 1.6;
-    max-width: 1200px;
-    /* Increased width */
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
-    /* Center it */
-    grid-column: 1 / -1;
-    width: 80%;
-    /* Reduced width as requested */
+    grid-column: 1 / -1 !important;
+    padding: 0 1rem;
 }
 
 @media print {
@@ -438,7 +473,9 @@ body {
         color: black !important;
     }
 }
+}
 
+/* Original styles continued */
 .text-block-directory-structure p {
     margin-bottom: 0 !important;
     font-family: monospace !important;
@@ -459,5 +496,25 @@ body {
 }
 
 .filter-toggle:hover {
+    color: var(--text-primary);
+}
+
+.action-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto;
+    /* Push to right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.action-btn:hover {
+    background: var(--background-hover);
     color: var(--text-primary);
 }

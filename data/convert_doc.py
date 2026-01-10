@@ -85,7 +85,33 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  for span in el.find_all('span'):
                     span.unwrap()
 
+                 # Clean up Google Redirects
+                 for a_tag in el.find_all('a', href=True):
+                     href = a_tag['href']
+                     if href.startswith('https://www.google.com/url'):
+                         # Extract 'q' parameter
+                         match = re.search(r'[?&]q=([^&]+)', href)
+                         if match:
+                             real_url = match.group(1)
+                             # URL decode if needed (simple approximation or import standard lib)
+                             # Assuming standard unquote isn't imported, let's keep it simple or import urllib.parse at top.
+                             # Actually standard library is best.
+                             import urllib.parse
+                             real_url = urllib.parse.unquote(real_url)
+                             a_tag['href'] = real_url
+
                  content = el.decode_contents().strip()
+                 
+                 # Check for junk content to ignore/stop
+                 text_content = el.get_text().strip()
+                 if "Blank Directory Structure" in text_content or "Blank VFX Vendor Specs" in text_content or text_content == ".":
+                     continue
+                 
+                 # Stop capturing if we hit the internal notes section starting with "JF -"
+                 if "JF -" in text_content:
+                     current_h1_obj = None # Stop capturing for this section
+                     continue
+
                  if content:
                     target_list.append({"html": f"<{el.name}>{content}</{el.name}>"})
 

@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Helper: Normalize Scope values (Title Case, singularize simple "s")
+    function normalizeScope(val) {
+        if (!val) return '';
+        let str = val.trim();
+        // Capitalize first letter
+        str = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+        // Simple plural handling: if ends in 's' and length > 4 (e.g. "Shots" -> "Shot")
+        // NOTE: this is a heuristic. "Process" -> "Proces" would be bad, but "Shots" -> "Shot" is good.
+        // Let's rely on specific renames for better safety or just basic case overlap.
+        // User asked for "capital changes, or puralization differences".
+        // Let's do case + simple singularize.
+        if (str.endsWith('s') && str.length > 4 && !str.endsWith('ss')) {
+            return str.slice(0, -1);
+        }
+        return str;
+    }
+
     const dom = {
         grid: document.getElementById('content-grid'),
         sidebar: document.getElementById('sidebar'),
@@ -23,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         scopeFilters: document.getElementById('scope-filters'),
         searchInput: document.getElementById('search-input'),
         stats: document.getElementById('stats-display'),
-        tabs: document.querySelectorAll('.tab-btn')
+        stats: document.getElementById('stats-display'),
+        tabs: document.querySelectorAll('.tab-btn'),
+        printBtn: document.getElementById('print-btn')
     };
 
     // URL Synchronization
@@ -55,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams(window.location.search);
 
         const tab = params.get('tab');
-        if (tab && ['Introduction', 'Scope Definitions', 'Specs', 'Directory Structure', 'Reference Docs'].includes(tab)) {
+        if (tab && ['Introduction', 'Scope Definitions', 'Data Sets', 'Directory Structure', 'Reference Docs'].includes(tab)) {
             state.currentTab = tab;
         }
 
@@ -115,10 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Visibility Logic
-        if (tabName === 'Specs') {
+        if (tabName === 'Data Sets') {
             dom.sidebar.classList.remove('hidden');
             dom.specsHeader.classList.remove('hidden');
-            renderSpecsGrid();
+            renderDataSetsGrid();
         } else {
             dom.sidebar.classList.add('hidden');
             dom.specsHeader.classList.add('hidden');
@@ -128,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderSimpleView(sectionName) {
         dom.grid.innerHTML = '';
+        dom.grid.classList.add('text-view-mode');
+
         const items = rawData[sectionName] || [];
 
         if (items.length === 0) {
@@ -139,9 +161,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (['Introduction', 'Directory Structure', 'Reference Docs'].includes(sectionName)) {
             const container = document.createElement('div');
             container.className = 'text-content';
+
+            // Add Section Title
+            const title = document.createElement('h1');
+            title.textContent = sectionName;
+            title.className = 'section-main-title'; // New class for styling if needed
+            title.style.marginBottom = '2rem';
+            title.style.color = 'var(--text-primary)';
+            container.appendChild(title);
+
             // Assuming first item has the merged HTML
             if (items[0] && items[0].html) {
-                container.innerHTML = items[0].html;
+                // parsing HTML string to append vs innerHTML to avoid wiping title
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = items[0].html;
+                container.appendChild(contentDiv);
             }
             dom.grid.appendChild(container);
             return;
@@ -149,6 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const container = document.createElement('div');
         container.className = 'text-content';
+
+        // Add Section Title for Scope Definitions etc
+        const title = document.createElement('h1');
+        title.textContent = sectionName;
+        title.className = 'section-main-title';
+        title.style.marginBottom = '2rem';
+        title.style.color = 'var(--text-primary)';
+        container.appendChild(title);
 
         items.forEach(item => {
             // Each item might be a dictionary of multiple definitions (from a table)
@@ -180,7 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 h2.items.forEach(item => {
                     const creators = Array.isArray(item.Creator) ? item.Creator : (item.Creator ? [item.Creator] : []);
                     const consumers = Array.isArray(item.Consumer) ? item.Consumer : (item.Consumer ? [item.Consumer] : []);
-                    const scope = Array.isArray(item.Scope) ? item.Scope : (item.Scope ? [item.Scope] : []);
+                    let rawScope = Array.isArray(item.Scope) ? item.Scope : (item.Scope ? [item.Scope] : []);
+
+                    // Normalize Scope
+                    const scope = rawScope.map(s => normalizeScope(s)).filter(s => s.length > 0);
 
                     specsFlatList.push({
                         h1Title: h1.title,
@@ -237,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     else state.filters[type].delete(value);
 
                     updateUrlParams();
-                    renderSpecsGrid();
+                    renderDataSetsGrid();
                 });
 
                 label.appendChild(input);
@@ -273,11 +318,18 @@ document.addEventListener('DOMContentLoaded', () => {
     dom.searchInput.addEventListener('input', (e) => {
         state.filters.search = e.target.value.toLowerCase();
         updateUrlParams();
-        renderSpecsGrid();
+        renderDataSetsGrid();
     });
 
-    function renderSpecsGrid() {
+    function renderDataSetsGrid() {
         dom.grid.innerHTML = '';
+        dom.grid.classList.remove('text-view-mode'); // Restore grid layout
+
+        // Add Section Title
+        const title = document.createElement('div');
+        title.innerHTML = '<h1 style="color: var(--text-primary);">Data Sets</h1>';
+        title.style.gridColumn = '1 / -1';
+        dom.grid.appendChild(title);
 
         // 1. Filter the flattened list
         const filteredItems = specsFlatList.filter(item => {
@@ -325,13 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Cards
                 items.forEach(item => {
-                    renderCard(item.original, dom.grid, item.creators, item.consumers, h2Title);
+                    renderCard(item.original, dom.grid, item.creators, item.consumers, item.scope, h2Title);
                 });
             }
         }
     }
 
-    function renderCard(itemData, container, creators, consumers, sectionTitle) {
+    function renderCard(itemData, container, creators, consumers, scope, sectionTitle) {
         const card = document.createElement('div');
         card.className = 'card';
 
@@ -341,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tags
         const creatorTags = creators.map(c => `<span class="tag">${c}</span>`).join('');
         const consumerTags = consumers.map(c => `<span class="tag">${c}</span>`).join('');
+        const scopeTags = scope.map(s => `<span class="tag">${s}</span>`).join('');
 
         // Build Body Content
         // We want to exclude Creator/Consumer from general fields, but show everything else.
@@ -348,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Special handling for Description to put it at top? Or just iterate?
         // Let's iterate but skip processed fields.
-        const skipKeys = ['Creator', 'Consumer', 'Description']; // Description handled separately if we want, or in loop
+        const skipKeys = ['Creator', 'Consumer', 'Description', 'Scope']; // Description handled separately if we want, or in loop
 
         // If Description exists, add it first?
         if (itemData.Description) {
@@ -380,18 +433,33 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="card-body">
                 ${bodyContent}
                 
-                ${creators.length ? `
-                <div class="field-group" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                    <span class="field-label">Creators</span>
-                    <div class="tag-container">${creatorTags}</div>
-                </div>` : ''}
-                ${consumers.length ? `
-                <div class="field-group">
-                    <span class="field-label">Consumers</span>
-                    <div class="tag-container">${consumerTags}</div>
-                </div>` : ''}
+                <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    ${scope.length ? `
+                        <div class="field-group">
+                            <span class="field-label">Scope</span>
+                            <div class="tag-container">${scopeTags}</div>
+                        </div>` : ''}
+                    
+                    ${creators.length ? `
+                        <div class="field-group">
+                            <span class="field-label">Creators</span>
+                            <div class="tag-container">${creatorTags}</div>
+                        </div>` : ''}
+                    
+                    ${consumers.length ? `
+                        <div class="field-group">
+                            <span class="field-label">Consumers</span>
+                            <div class="tag-container">${consumerTags}</div>
+                        </div>` : ''}
+                </div>
             </div>
         `;
         container.appendChild(card);
+    }
+    // Handle Print Button
+    if (dom.printBtn) {
+        dom.printBtn.addEventListener('click', () => {
+            window.print();
+        });
     }
 });

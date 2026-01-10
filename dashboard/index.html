@@ -14,13 +14,27 @@
 
 <body>
     <header class="site-header">
-        <h1>VES On-Set VFX Data Collection and Usage Guide</h1>
+        <div class="header-content">
+            <img src="ves-logo.png" alt="VES Logo" class="header-logo">
+            <h1>VES On-Set VFX Data Collection and Usage Guide</h1>
+        </div>
     </header>
+
+    <div class="tab-bar-container"
+        style="background: var(--sidebar-bg); border-bottom: 1px solid var(--border-color); padding: 0 2rem;">
+        <nav class="tab-nav" style="margin-bottom: 0; border-bottom: none;">
+            <button class="tab-btn active" data-tab="Introduction">Introduction</button>
+            <button class="tab-btn" data-tab="Scope Definitions">Scope Definitions</button>
+            <button class="tab-btn" data-tab="Data Sets">Data Sets</button>
+            <button class="tab-btn" data-tab="Directory Structure">Directory Structure</button>
+            <button class="tab-btn" data-tab="Reference Docs">Reference Docs</button>
+        </nav>
+    </div>
 
     <div class="app-container">
         <aside class="sidebar" id="sidebar">
             <div class="logo">
-                <h1>On-Set Specs</h1>
+                <!-- <h1>On-Set Specs</h1> removed as per feedback -->
             </div>
 
             <div id="filter-container">
@@ -48,17 +62,19 @@
         </aside>
 
         <main class="main-content">
-            <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="Introduction">Introduction</button>
-                <button class="tab-btn" data-tab="Scope Definitions">Scope Definitions</button>
-                <button class="tab-btn" data-tab="Specs">Specs</button>
-                <button class="tab-btn" data-tab="Directory Structure">Directory Structure</button>
-                <button class="tab-btn" data-tab="Reference Docs">Reference Docs</button>
-            </nav>
+            <!-- Tab Nav moved up -->
 
             <header class="top-bar" id="specs-header">
                 <input type="text" id="search-input" placeholder="Search specs...">
                 <div class="stats" id="stats-display">Showing all items</div>
+                <button id="print-btn" class="action-btn" aria-label="Print">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                </button>
             </header>
 
             <div id="content-grid" class="grid-container">
