@@ -141,6 +141,18 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  # Handle special sections content (Intro, Scope, Ref Docs)
                  target_list = output[current_h1_obj["title"]]
                  
+                 # Strip all attributes (class, style, etc) except href/src to ensure vanilla HTML
+                 # This removes Google Doc formatting completely
+                 def strip_attrs(tag):
+                     attrs = dict(tag.attrs)
+                     for attr in attrs:
+                         if attr not in ['href', 'src']:
+                             del tag[attr]
+
+                 strip_attrs(el)
+                 for child in el.find_all(True):
+                     strip_attrs(child)
+                 
                  # For Reference Docs, we want to keep links working.
                  # The 'clean_text' might strip some html if applied too aggressively, 
                  # but here we use decode_contents which preserves tags.
