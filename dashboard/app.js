@@ -23,11 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Capitalize first letter
         str = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-        // Simple plural handling: if ends in 's' and length > 4 (e.g. "Shots" -> "Shot")
-        // NOTE: this is a heuristic. "Process" -> "Proces" would be bad, but "Shots" -> "Shot" is good.
-        // Let's rely on specific renames for better safety or just basic case overlap.
-        // User asked for "capital changes, or puralization differences".
-        // Let's do case + simple singularize.
+        // Simple plural handling
         if (str.endsWith('s') && str.length > 4 && !str.endsWith('ss')) {
             return str.slice(0, -1);
         }
@@ -44,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         scopeFilters: document.getElementById('scope-filters'),
         searchInput: document.getElementById('search-input'),
         stats: document.getElementById('stats-display'),
-        stats: document.getElementById('stats-display'),
         tabs: document.querySelectorAll('.tab-btn'),
         printBtn: document.getElementById('print-btn'),
         tooltip: document.getElementById('tooltip')
@@ -56,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target) {
             const text = target.dataset.tooltip;
             if (text) {
-                dom.tooltip.textContent = text; // Or innerHTML if we want basic formatting
+                dom.tooltip.textContent = text;
                 dom.tooltip.classList.remove('hidden');
                 dom.tooltip.classList.add('visible');
             }
@@ -65,12 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('mousemove', (e) => {
         if (dom.tooltip.classList.contains('visible')) {
-            // Offset from mouse
             const offset = 15;
             let left = e.clientX + offset;
             let top = e.clientY + offset;
 
-            // Simple boundary detection (optional but good)
             if (left + 350 > window.innerWidth) {
                 left = e.clientX - 350 - offset;
             }
@@ -99,15 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.filters.search) {
             params.set('search', state.filters.search);
         }
-
         if (state.filters.creators.size > 0) {
             params.set('creators', Array.from(state.filters.creators).join(','));
         }
-
         if (state.filters.consumers.size > 0) {
             params.set('consumers', Array.from(state.filters.consumers).join(','));
         }
-
         if (state.filters.scope.size > 0) {
             params.set('scope', Array.from(state.filters.scope).join(','));
         }
@@ -118,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadStateFromUrl() {
         const params = new URLSearchParams(window.location.search);
-
         const tab = params.get('tab');
         if (tab && ['Introduction', 'Scope Definitions', 'Data Sets', 'Directory Structure', 'Reference Docs'].includes(tab)) {
             state.currentTab = tab;
@@ -131,38 +120,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const creators = params.get('creators');
-        if (creators) {
-            creators.split(',').forEach(c => state.filters.creators.add(c));
-        }
+        if (creators) creators.split(',').forEach(c => state.filters.creators.add(c));
 
         const consumers = params.get('consumers');
-        if (consumers) {
-            consumers.split(',').forEach(c => state.filters.consumers.add(c));
-        }
+        if (consumers) consumers.split(',').forEach(c => state.filters.consumers.add(c));
 
         const scope = params.get('scope');
-        if (scope) {
-            scope.split(',').forEach(c => state.filters.scope.add(c));
-        }
+        if (scope) scope.split(',').forEach(s => state.filters.scope.add(s));
     }
 
     // Initialize
     if (typeof ON_SET_DATA !== 'undefined') {
         rawData = ON_SET_DATA;
 
-        // Parse Scope Definitions first
+        // Parse Scope Definitions
         if (rawData['Scope Definitions']) {
             rawData['Scope Definitions'].forEach(item => {
-                // Determine layout (raw dictionary vs header/body objects if any)
-                // Data format seems to be array of objects. Some are HTML headers, others are dictionaries.
-                // Based on data.js inspection, it's mixed. But definitions seem to be single key-value items in the array or rows.
-                // Wait, based on user's data.js view: items can be { "Take": "Definition..." }.
-
                 Object.entries(item).forEach(([key, value]) => {
-                    // Skip if key is "html" (used for header rendering in simple view)
                     if (key === 'html') return;
-
-                    // Normalize key for lookup
                     const normalized = normalizeScope(key);
                     if (normalized) {
                         scopeDescriptions.set(normalized.toLowerCase(), value);
@@ -171,15 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        processSpecs(); // Prepare filterable list
-
-        loadStateFromUrl(); // Load state before rendering
-
-        renderFilters(); // Will check boxes based on state
-        switchTab(state.currentTab); // Switch to loaded tab
+        processSpecs();
+        loadStateFromUrl();
+        renderFilters();
+        switchTab(state.currentTab);
     } else {
-        console.error('Error: ON_SET_DATA not found. Make sure data.js is loaded.');
-        dom.stats.textContent = 'Error loading data. Please check console.';
+        console.error('Error: ON_SET_DATA not found.');
+        dom.stats.textContent = 'Error loading data.';
     }
 
     // Tabs Event Listeners
@@ -195,13 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
         state.currentTab = tabName;
         updateUrlParams();
 
-        // Update active class on buttons
         dom.tabs.forEach(btn => {
             if (btn.dataset.tab === tabName) btn.classList.add('active');
             else btn.classList.remove('active');
         });
 
-        // Visibility Logic
         if (tabName === 'Data Sets') {
             dom.sidebar.classList.remove('hidden');
             dom.specsHeader.classList.remove('hidden');
@@ -214,17 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Render Simple List / Text View (Introduction, Directory Structure, Reference Docs, Scope Definitions)
+    // Render Simple View (Intro, Tree, Ref Docs, Scope)
     function renderSimpleView(sectionName) {
         dom.grid.innerHTML = '';
         dom.sidebar.classList.add('hidden');
         dom.specsHeader.classList.add('hidden');
         dom.filterContainer.classList.add('hidden');
-
-        // Reset Grid Layout
         dom.grid.classList.remove('text-view-mode');
 
-        // Add Section Title
         const title = document.createElement('h1');
         title.textContent = sectionName;
         title.className = 'section-main-title';
@@ -233,90 +201,140 @@ document.addEventListener('DOMContentLoaded', () => {
         title.style.color = 'var(--text-primary)';
         dom.grid.appendChild(title);
 
-        const items = rawData[sectionName] || [];
+        const data = rawData[sectionName] || [];
 
-        // Special handling for text-block sections
-        const isTextBlock = ['Introduction', 'Directory Structure', 'Reference Docs'].includes(sectionName);
+        // Directory Tree
+        if (sectionName === "Directory Structure" && typeof DIRECTORY_DATA !== 'undefined') {
+            const treeContainer = document.createElement('div');
+            treeContainer.className = 'tree-view-container';
+            const rootUl = document.createElement('ul');
+            rootUl.className = 'tree-root';
 
-        if (isTextBlock) {
+            function buildTree(nodes, parentElement) {
+                nodes.forEach(node => {
+                    const li = document.createElement('li');
+                    li.className = 'tree-node';
+                    const hasChildren = node.children && node.children.length > 0;
+
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'tree-content';
+
+                    const toggleSpan = document.createElement('span');
+                    toggleSpan.className = `tree-toggle ${hasChildren ? '' : 'empty'}`;
+                    toggleSpan.textContent = hasChildren ? '▼' : '•';
+
+                    const iconSpan = document.createElement('span');
+                    iconSpan.className = 'tree-icon';
+                    iconSpan.textContent = hasChildren ? '📂' : '📄';
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.textContent = node.name;
+
+                    contentDiv.appendChild(toggleSpan);
+                    contentDiv.appendChild(iconSpan);
+                    contentDiv.appendChild(nameSpan);
+                    li.appendChild(contentDiv);
+
+                    if (hasChildren) {
+                        const childrenUl = document.createElement('ul');
+                        childrenUl.className = 'tree-children';
+                        buildTree(node.children, childrenUl);
+                        li.appendChild(childrenUl);
+
+                        contentDiv.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const isHidden = childrenUl.style.display === 'none';
+                            childrenUl.style.display = isHidden ? 'block' : 'none';
+                            toggleSpan.textContent = isHidden ? '▼' : '▶';
+                        });
+                    }
+                    parentElement.appendChild(li);
+                });
+            }
+
+            buildTree(DIRECTORY_DATA, rootUl);
+            treeContainer.appendChild(rootUl);
+            dom.grid.appendChild(treeContainer);
+            return;
+        }
+
+        // Scope Definitions (Grid + Cards)
+        if (sectionName === "Scope Definitions") {
+            data.forEach(item => {
+                if (item.html) {
+                    const div = document.createElement('div');
+                    div.className = 'text-content intro-block';
+                    div.style.gridColumn = '1 / -1';
+                    div.style.maxWidth = '800px';
+                    div.style.margin = '0 auto 2rem auto';
+                    div.innerHTML = item.html;
+                    dom.grid.appendChild(div);
+                } else {
+                    Object.entries(item).forEach(([key, value]) => {
+                        if (key === 'html') return;
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.style.marginBottom = '1.5rem';
+
+                        const header = document.createElement('div');
+                        header.className = 'card-header';
+                        const titleDiv = document.createElement('div');
+                        titleDiv.className = 'card-title';
+                        titleDiv.textContent = key;
+                        titleDiv.setAttribute('data-tooltip', key);
+                        header.appendChild(titleDiv);
+
+                        const body = document.createElement('div');
+                        body.className = 'card-body';
+                        const p = document.createElement('p');
+                        p.style.whiteSpace = 'pre-wrap';
+                        p.textContent = value;
+                        body.appendChild(p);
+
+                        card.appendChild(header);
+                        card.appendChild(body);
+                        dom.grid.appendChild(card);
+                    });
+                }
+            });
+            return;
+        }
+
+        // Text Blocks (Intro, Ref Docs)
+        if (['Introduction', 'Reference Docs'].includes(sectionName)) {
             dom.grid.classList.add('text-view-mode');
             const container = document.createElement('div');
             container.className = 'text-content';
-            items.forEach(item => {
+            data.forEach(item => {
                 if (item.html) {
-                    const contentDiv = document.createElement('div');
-                    contentDiv.innerHTML = item.html;
-                    container.appendChild(contentDiv);
+                    const div = document.createElement('div');
+                    div.innerHTML = item.html;
+                    container.appendChild(div);
                 }
             });
             dom.grid.appendChild(container);
             return;
         }
 
-        if (sectionName === 'Scope Definitions') {
-            const definedTerms = new Set();
-            const definedDefinitions = new Set();
-            items.forEach(item => {
-                Object.entries(item).forEach(([key, value]) => {
-                    if (key !== 'html') {
-                        definedTerms.add(key.toLowerCase());
-                        definedDefinitions.add(value.trim());
-                    }
-                });
-            });
-
-            items.forEach(item => {
-                Object.entries(item).forEach(([key, value]) => {
-                    if (key === 'html') {
-                        const tmp = document.createElement('div');
-                        tmp.innerHTML = value;
-                        const text = tmp.textContent.trim();
-                        if (definedTerms.has(text.toLowerCase()) || definedDefinitions.has(text)) return;
-
-                        const div = document.createElement('div');
-                        div.className = 'text-content intro-block';
-                        div.style.gridColumn = '1 / -1';
-                        div.style.maxWidth = '800px';
-                        div.style.margin = '0 auto 2rem auto';
-                        div.innerHTML = value;
-                        dom.grid.appendChild(div);
-                        return;
-                    }
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.style.marginBottom = '1.5rem';
-                    card.innerHTML = `<div class="card-header"><div class="card-title" data-tooltip="${key}">${key}</div></div><div class="card-body"><p style="white-space: pre-wrap;">${value}</p></div>`;
-                    dom.grid.appendChild(card);
-                });
-            });
-            return;
-        }
-
-        items.forEach(item => {
+        // Fallback
+        data.forEach(item => {
             if (item.html) {
-                const div = document.createElement('div');
-                div.className = 'text-content';
-                if (!dom.grid.classList.contains('text-view-mode')) {
-                    div.style.gridColumn = '1 / -1';
+                if (item.type === "tree_view") {
+                    const fallback = document.createElement('div');
+                    fallback.textContent = "Directory Data not loaded.";
+                    dom.grid.appendChild(fallback);
+                    return;
                 }
+                const div = document.createElement('div');
                 div.innerHTML = item.html;
                 dom.grid.appendChild(div);
-                return;
             }
-            Object.entries(item).forEach(([key, value]) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.marginBottom = '1.5rem';
-                card.innerHTML = `<div class="card-header"><div class="card-title">${key}</div></div><div class="card-body"><p style="white-space: pre-wrap;">${value}</p></div>`;
-                dom.grid.appendChild(card);
-            });
         });
     }
 
-    // Process nested specs into flat list for filtering (but keep hierarchy ref)
     function processSpecs() {
         specsFlatList = [];
-        const specs = rawData['Specs'] || [];
+        const specs = rawData['Data Sets'] || rawData['Specs'] || []; // Support both names just in case
 
         specs.forEach(h1 => {
             h1.subsections.forEach(h2 => {
@@ -324,8 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const creators = Array.isArray(item.Creator) ? item.Creator : (item.Creator ? [item.Creator] : []);
                     const consumers = Array.isArray(item.Consumer) ? item.Consumer : (item.Consumer ? [item.Consumer] : []);
                     let rawScope = Array.isArray(item.Scope) ? item.Scope : (item.Scope ? [item.Scope] : []);
-
-                    // Normalize Scope
                     const scope = rawScope.map(s => normalizeScope(s)).filter(s => s.length > 0);
 
                     specsFlatList.push({
@@ -352,16 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
             item.scope.forEach(c => allScope.add(c));
         });
 
-        // Helper to render a group with "See more"
         const renderGroup = (container, items, type) => {
             container.innerHTML = '';
             const sortedItems = Array.from(items).sort();
-
-            // Constants
             const LIMIT = 5;
             const hasMore = sortedItems.length > LIMIT;
 
-            // Render items
             sortedItems.forEach((value, index) => {
                 const label = document.createElement('label');
                 label.className = 'checkbox-label';
@@ -373,15 +385,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const input = document.createElement('input');
                 input.type = 'checkbox';
                 input.value = value;
-
-                if (state.filters[type].has(value)) {
-                    input.checked = true;
-                }
+                if (state.filters[type].has(value)) input.checked = true;
 
                 input.addEventListener('change', (e) => {
                     if (e.target.checked) state.filters[type].add(value);
                     else state.filters[type].delete(value);
-
                     updateUrlParams();
                     renderDataSetsGrid();
                 });
@@ -389,34 +397,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 label.appendChild(input);
                 label.appendChild(document.createTextNode(value));
                 if (type === 'scope') {
-                    // Try to match description
-                    // The value is already normalized (e.g. "Take")
                     const desc = scopeDescriptions.get(value.toLowerCase());
-                    if (desc) {
-                        // label.title = desc; // Removed native tooltip
-                        label.dataset.tooltip = desc;
-                    }
+                    if (desc) label.dataset.tooltip = desc;
                 }
-
                 container.appendChild(label);
             });
 
-            // Render Toggle Button
             if (hasMore) {
                 const toggleBtn = document.createElement('button');
                 toggleBtn.className = 'filter-toggle';
                 toggleBtn.textContent = 'See more';
                 let expanded = false;
-
                 toggleBtn.addEventListener('click', () => {
                     expanded = !expanded;
                     const hiddenItems = container.querySelectorAll('.hidden-filter-item');
-                    hiddenItems.forEach(item => {
-                        item.style.display = expanded ? 'flex' : 'none';
-                    });
+                    hiddenItems.forEach(item => item.style.display = expanded ? 'flex' : 'none');
                     toggleBtn.textContent = expanded ? 'See less' : 'See more';
                 });
-
                 container.appendChild(toggleBtn);
             }
         };
@@ -434,15 +431,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderDataSetsGrid() {
         dom.grid.innerHTML = '';
-        dom.grid.classList.remove('text-view-mode'); // Restore grid layout
+        dom.grid.classList.remove('text-view-mode');
 
-        // Add Section Title
         const title = document.createElement('div');
         title.innerHTML = '<h1 style="color: var(--text-primary);">Data Sets</h1>';
         title.style.gridColumn = '1 / -1';
         dom.grid.appendChild(title);
 
-        // 1. Filter the flattened list
         const filteredItems = specsFlatList.filter(item => {
             if (state.filters.search) {
                 const jsonStr = JSON.stringify(item.original).toLowerCase();
@@ -456,37 +451,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         dom.stats.textContent = `Showing ${filteredItems.length} items`;
 
-        // 2. Group by H1 -> H2 for display
-        // We rebuild the tree structure dynamically based on filtered items
         const grouped = {};
-
         filteredItems.forEach(item => {
             if (!grouped[item.h1Title]) grouped[item.h1Title] = {};
             if (!grouped[item.h1Title][item.h2Title]) grouped[item.h1Title][item.h2Title] = [];
             grouped[item.h1Title][item.h2Title].push(item);
         });
 
-        // 3. Render
-        // Sort H1 keys? Original order preserved if object keys insertion order (usually true in modern JS)
-        // But better to rely on original order if possible. 
-        // For simplicity, iterating object keys.
-
         for (const [h1Title, h2Group] of Object.entries(grouped)) {
-            // H1 Header
             const h1El = document.createElement('div');
             h1El.className = 'section-h1';
             h1El.innerHTML = `<h2>${h1Title}</h2>`;
             dom.grid.appendChild(h1El);
 
             for (const [h2Title, items] of Object.entries(h2Group)) {
-                // H2 Header - Removed as per user request (moved into card)
-                // const h2El = document.createElement('div');
-                // h2El.className = 'section-h2';
-                // // Remove numbering from Title if desirable? Keeping as is.
-                // h2El.innerHTML = `<h3>${h2Title}</h3>`;
-                // dom.grid.appendChild(h2El);
-
-                // Cards
                 items.forEach(item => {
                     renderCard(item.original, dom.grid, item.creators, item.consumers, item.scope, h2Title);
                 });
@@ -497,11 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCard(itemData, container, creators, consumers, scope, sectionTitle) {
         const card = document.createElement('div');
         card.className = 'card';
-
-        // Use H2 section title as the main card title
         const displayTitle = sectionTitle || 'Item';
-
-        // Tags
         const creatorTags = creators.map(c => `<span class="tag">${c}</span>`).join('');
         const consumerTags = consumers.map(c => `<span class="tag">${c}</span>`).join('');
         const scopeTags = scope.map(s => {
@@ -510,71 +484,35 @@ document.addEventListener('DOMContentLoaded', () => {
             return `<span class="tag"${tooltipAttr}>${s}</span>`;
         }).join('');
 
-        // Build Body Content
-        // We want to exclude Creator/Consumer from general fields, but show everything else.
         let bodyContent = '';
+        const skipKeys = ['Creator', 'Consumer', 'Description', 'Scope'];
 
-        // Special handling for Description to put it at top? Or just iterate?
-        // Let's iterate but skip processed fields.
-        const skipKeys = ['Creator', 'Consumer', 'Description', 'Scope']; // Description handled separately if we want, or in loop
-
-        // If Description exists, add it first?
         if (itemData.Description) {
             bodyContent += `<div class="field-item" style="color: var(--text-secondary); margin-bottom: 1rem;"><p>${itemData.Description}</p></div>`;
         }
 
         Object.entries(itemData).forEach(([key, value]) => {
             if (skipKeys.includes(key)) return;
-
             let valueHtml = '';
-            if (Array.isArray(value)) {
-                valueHtml = `<ul style="margin: 0; padding-left: 1.2rem;">${value.map(v => `<li>${v}</li>`).join('')}</ul>`;
-            } else {
-                valueHtml = `<p>${value}</p>`;
-            }
-
-            bodyContent += `
-                <div class="field-group">
-                    <span class="field-label">${key}</span>
-                    <div class="field-value">${valueHtml}</div>
-                </div>
-            `;
+            if (Array.isArray(value)) valueHtml = `<ul style="margin: 0; padding-left: 1.2rem;">${value.map(v => `<li>${v}</li>`).join('')}</ul>`;
+            else valueHtml = `<p>${value}</p>`;
+            bodyContent += `<div class="field-group"><span class="field-label">${key}</span><div class="field-value">${valueHtml}</div></div>`;
         });
 
         card.innerHTML = `
-            <div class="card-header">
-                <div class="card-title">${displayTitle}</div>
+        <div class="card-header"><div class="card-title">${displayTitle}</div></div>
+        <div class="card-body">
+            ${bodyContent}
+            <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                ${scope.length ? `<div class="field-group"><span class="field-label">Scope</span><div class="tag-container">${scopeTags}</div></div>` : ''}
+                ${creators.length ? `<div class="field-group"><span class="field-label">Creators</span><div class="tag-container">${creatorTags}</div></div>` : ''}
+                ${consumers.length ? `<div class="field-group"><span class="field-label">Consumers</span><div class="tag-container">${consumerTags}</div></div>` : ''}
             </div>
-            <div class="card-body">
-                ${bodyContent}
-                
-                <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                    ${scope.length ? `
-                        <div class="field-group">
-                            <span class="field-label">Scope</span>
-                            <div class="tag-container">${scopeTags}</div>
-                        </div>` : ''}
-                    
-                    ${creators.length ? `
-                        <div class="field-group">
-                            <span class="field-label">Creators</span>
-                            <div class="tag-container">${creatorTags}</div>
-                        </div>` : ''}
-                    
-                    ${consumers.length ? `
-                        <div class="field-group">
-                            <span class="field-label">Consumers</span>
-                            <div class="tag-container">${consumerTags}</div>
-                        </div>` : ''}
-                </div>
-            </div>
-        `;
+        </div>`;
         container.appendChild(card);
     }
-    // Handle Print Button
+
     if (dom.printBtn) {
-        dom.printBtn.addEventListener('click', () => {
-            window.print();
-        });
+        dom.printBtn.addEventListener('click', () => window.print());
     }
 });

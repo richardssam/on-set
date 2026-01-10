@@ -395,6 +395,75 @@ h1 {
     padding: 0 1rem;
 }
 
+/* Tree View Styles */
+.tree-root,
+.tree-children {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.tree-view-container {
+    /* Layout: Center in grid */
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    /* Style */
+    background-color: var(--card-bg);
+    padding: 30px 60px 30px 40px;
+    /* Top Right Bottom Left - Extra right padding */
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.tree-children {
+    padding-left: 30px !important;
+    border-left: 2px solid rgba(148, 163, 184, 0.3) !important;
+    margin-left: 10px !important;
+    /* Removed display: block !important to allow toggling via .hidden class */
+}
+
+.tree-node {
+    margin: 4px 0;
+}
+
+.tree-content {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--text-primary);
+    transition: background-color 0.2s;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.tree-content:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tree-icon {
+    margin-right: 8px;
+    font-size: 1.1em;
+    opacity: 0.7;
+}
+
+.tree-toggle {
+    margin-right: 5px;
+    width: 14px;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+.tree-toggle.empty {
+    opacity: 0;
+    pointer-events: none;
+}
+
 @media print {
 
     /* Hide non-printable elements */
@@ -419,6 +488,71 @@ h1 {
         border-bottom: 2px solid black;
     }
 
+    /* Tree View Styles */
+    .tree-root,
+    .tree-children {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+    }
+
+    .tree-view-container {
+        /* DEBUG: Dark red background to verify styles are loading */
+        background-color: rgba(50, 20, 20, 0.5);
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .tree-children {
+        /* Indent the container of children */
+        padding-left: 30px !important;
+        /* Add a visible border line */
+        border-left: 2px solid rgba(255, 255, 255, 0.3) !important;
+        margin-left: 10px !important;
+        display: block !important;
+    }
+
+    .tree-node {
+        margin: 4px 0;
+    }
+
+    .tree-content {
+        display: flex;
+        align-items: center;
+        padding: 6px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        color: var(--text-color);
+        transition: background-color 0.2s;
+        font-family: var(--font-mono);
+        /* Use monospace for file names */
+        font-size: 0.9em;
+    }
+
+    .tree-content:hover {
+        background-color: var(--bg-hover);
+    }
+
+    .tree-icon {
+        margin-right: 8px;
+        font-size: 1.1em;
+        opacity: 0.7;
+    }
+
+    .tree-toggle {
+        margin-right: 5px;
+        width: 14px;
+        text-align: center;
+        font-size: 0.8em;
+        color: var(--text-muted);
+    }
+
+    .tree-toggle.empty {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Folder/File Icons can be refined here if we distinguish files later */
     /* Layout adjustments */
     body {
         height: auto;

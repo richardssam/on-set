@@ -1,9 +1,59 @@
 import json
 from bs4 import BeautifulSoup
 import re
+import os
+import urllib.parse
 
 def clean_text(text):
     return re.sub(r'\s+', ' ', text).strip()
+
+def parse_directory_tree(lines):
+    root = []
+    stack = [] # tuple of (level, node)
+    
+    for line in lines:
+        line = line.replace('\xa0', ' ') # Replace non-breaking space
+        
+        # Regex to capture lead
+        # Matches any sequence of │, ├, └, ─, or space
+        match = re.match(r'^([│├└─\s]+)(.*)', line)
+        if not match:
+            continue
+            
+        prefix = match.group(1)
+        name = match.group(2).strip()
+        
+        if not name: continue
+        
+        # Calculate level.
+        # "│   " is 4 chars.
+        level = len(prefix) // 4
+        
+        node = {
+            "name": name,
+            "children": []
+        }
+        
+        # Stack logic
+        if not stack:
+            # First item
+            root.append(node)
+            stack.append((level, node))
+        else:
+            # Find parent: Pop items from stack that are at same or deeper level
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            
+            if stack:
+                # Add to the node at the top of the stack (parent)
+                stack[-1][1]["children"].append(node)
+                stack.append((level, node))
+            else:
+                # Top level sibling
+                root.append(node)
+                stack.append((level, node))
+                
+    return root
 
 def parse_google_doc_html(html_path, output_css_path=None):
     with open(html_path, 'r', encoding='utf-8') as f:
@@ -25,14 +75,16 @@ def parse_google_doc_html(html_path, output_css_path=None):
     output = {
         "Introduction": [],
         "Scope Definitions": [],
-        "Specs": [],
-        "Directory Structure": [],
+        "Data Sets": [],
+        "Directory Structure": [], # Will now just be a placeholder or empty in main data
         "Reference Docs": []
     }
     
     current_h1_obj = None
     current_h2_obj = None
-    in_reference_docs = False
+    
+    # Accumulator for directory lines
+    directory_lines = []
     
     # We iterate through all relevant elements in order
     # Note: re.compile matches tags
@@ -41,12 +93,23 @@ def parse_google_doc_html(html_path, output_css_path=None):
     for el in elements:
         text = clean_text(el.get_text(separator=' ', strip=True))
         
-
-
         # Check for Directory Structure (ASCII Tree)
-        if any(char in text for char in ['│', '├', '└']) or "directories," in text and "files" in text:
-             output["Directory Structure"].append({"html": str(el)})
-             continue
+        # We collect these lines separately now
+        if any(char in text for char in ['│', '├', '└']) and len(text) > 2:
+             # We want the raw text with indentation, so use el.get_text without strip=True for logic,
+             # but actually our parse function expects just lines. 
+             # Let's trust el.get_text() preserves enough. 
+             # Actually, clean_text strips whitespace. We need the raw leading whitespace/chars.
+             raw_text = el.get_text(separator=' ', strip=False)
+             # Also replace non-breaking spaces early to be safe
+             raw_text = raw_text.replace('\xa0', ' ')
+             if any(char in raw_text for char in ['│', '├', '└']):
+                 # If we encounter tree lines, ensure we stop adding to Reference Docs (or any previous section)
+                 # This prevents empty lines or artifacts within the tree from falling back into the previous section.
+                 if current_h1_obj and current_h1_obj.get("title") == "Reference Docs":
+                     current_h1_obj = None 
+                 directory_lines.append(raw_text)
+                 continue # Skip adding to normal output
 
         if el.name == 'h1':
             if text in ["Introduction", "Scope Definitions", "17. Reference Documents"]:
@@ -60,7 +123,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
                     "title": text,
                     "subsections": []
                 }
-                output["Specs"].append(current_h1_obj)
+                output["Data Sets"].append(current_h1_obj)
                 current_h2_obj = None
                 
         elif el.name == 'h2':
@@ -96,7 +159,6 @@ def parse_google_doc_html(html_path, output_css_path=None):
                              # URL decode if needed (simple approximation or import standard lib)
                              # Assuming standard unquote isn't imported, let's keep it simple or import urllib.parse at top.
                              # Actually standard library is best.
-                             import urllib.parse
                              real_url = urllib.parse.unquote(real_url)
                              a_tag['href'] = real_url
 
@@ -111,6 +173,12 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  if "JF -" in text_content:
                      current_h1_obj = None # Stop capturing for this section
                      continue
+                 
+                 # Also stop if we see "Directory Structure" title as plain text (if it wasn't caught as H1)
+                 if "Directory Structure" in text_content and len(text_content) < 40:
+                     if current_h1_obj and current_h1_obj.get("title") == "Reference Docs":
+                         current_h1_obj = None
+                         continue
 
                  # Special deduplication for Scope Definitions:
                  # If we are in Scope Definitions, and the text matches a Key or Value from a previously parsed table, skip it.
@@ -183,12 +251,15 @@ def parse_google_doc_html(html_path, output_css_path=None):
                         current_h1_obj["subsections"][-1]["items"].append(table_data)
 
     # Post-process Merge HTML blocks
-    for section in ["Introduction", "Reference Docs", "Directory Structure"]:
-        if output[section]:
-            merged_html = f"<div class='text-block-{section.lower().replace(' ', '-')}'>" + "".join([x["html"] for x in output[section]]) + "</div>"
+    for section in ["Introduction", "Reference Docs"]: # Exclude Directory Structure from HTML merge as it is now empty/placeholder
+        if output.get(section): # Safely get
+            merged_html = f"<div class='text-block-{section.lower().replace(' ', '-')}'>" + "".join([str(x["html"]) for x in output[section] if "html" in x]) + "</div>"
             output[section] = [{"html": merged_html}]
+            
+    # Set placeholder for Directory Structure if not already set or if empty
+    output["Directory Structure"] = [{"type": "tree_view"}]
 
-    return output
+    return output, directory_lines
 
 def clean_tag(tag):
     # 1. Basic cleaning
@@ -298,31 +369,43 @@ if __name__ == "__main__":
         output_file = os.path.abspath(output_file)
         
     # Determine CSS output path relative to the output JS file's directory
-    # This assumes the dashboard directory is a sibling of the directory containing the output JS file
     css_output_file = os.path.join(os.path.dirname(output_file), "../dashboard/doc_styles.css")
     
     print(f"Parsing {input_file}...")
     try:
-        json_data = parse_google_doc_html(input_file, css_output_file)
+        # Now returns tuple: (json_data, directory_lines)
+        result = parse_google_doc_html(input_file, css_output_file)
         
+        # Determine valid result
+        if isinstance(result, tuple):
+            json_data, directory_lines = result
+        else:
+            # Fallback if function signature didn't update as expected (safety)
+            json_data = result
+            directory_lines = []
+        
+        # Parse directory lines into tree structure
+        if directory_lines:
+            print(f"Found {len(directory_lines)} directory structure lines. Parsing tree...")
+            directory_tree = parse_directory_tree(directory_lines)
+            
+            # Save to separate file
+            dir_output_file = os.path.join(os.path.dirname(output_file), "directory_data.js")
+            with open(dir_output_file, 'w', encoding='utf-8') as f:
+                dir_js_content = f"const DIRECTORY_DATA = {json.dumps(directory_tree, indent=4)};"
+                f.write(dir_js_content)
+            print(f"Directory data saved to {dir_output_file}")
+            
         # Ensure the output directory exists
         output_dir = os.path.dirname(output_file)
         if output_dir and not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        # Write as a JS file with a global variable
+        # Write main JS file
         with open(output_file, 'w', encoding='utf-8') as f:
             js_content = f"const ON_SET_DATA = {json.dumps(json_data, indent=4)};"
             f.write(js_content)
             
-        # But to be minimally invasive, we'll patch the path inside the function or just move the CSS writing logic out.
-        # Let's check parse_google_doc_html again. It writes to "../dashboard/doc_styles.css" relative to CWD.
-        # We should update parse_google_doc_html to use exact path.
-        
-        # Since I cannot easily change the function signature in this replace block without replacing the whole function,
-        # I will leave the function as is but update the CSS writing PART inside parse_google_doc_html in a separate edit 
-        # OR just update the function here if I included it in the range. 
-        # I did include the end of the file, but not the start of parse_google_doc_html. 
         
         print(f"Successfully converted to {output_file}")
         
