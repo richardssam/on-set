@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tabName === 'Data Sets') {
             dom.sidebar.classList.remove('hidden');
             dom.specsHeader.classList.remove('hidden');
+            dom.filterContainer.classList.remove('hidden');
             renderDataSetsGrid();
         } else {
             dom.sidebar.classList.add('hidden');
@@ -219,10 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.sidebar.classList.add('hidden');
         dom.specsHeader.classList.add('hidden');
         dom.filterContainer.classList.add('hidden');
-        
+
         // Reset Grid Layout
         dom.grid.classList.remove('text-view-mode');
-        
+
         // Add Section Title
         const title = document.createElement('h1');
         title.textContent = sectionName;
@@ -238,44 +239,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const isTextBlock = ['Introduction', 'Directory Structure', 'Reference Docs'].includes(sectionName);
 
         if (isTextBlock) {
-             dom.grid.classList.add('text-view-mode');
-             const container = document.createElement('div');
-             container.className = 'text-content';
-             items.forEach(item => {
-                 if (item.html) {
-                     const contentDiv = document.createElement('div');
-                     contentDiv.innerHTML = item.html;
-                     container.appendChild(contentDiv);
-                 }
-             });
-             dom.grid.appendChild(container);
-             return;
+            dom.grid.classList.add('text-view-mode');
+            const container = document.createElement('div');
+            container.className = 'text-content';
+            items.forEach(item => {
+                if (item.html) {
+                    const contentDiv = document.createElement('div');
+                    contentDiv.innerHTML = item.html;
+                    container.appendChild(contentDiv);
+                }
+            });
+            dom.grid.appendChild(container);
+            return;
         }
 
         if (sectionName === 'Scope Definitions') {
-             const definedTerms = new Set();
-             const definedDefinitions = new Set();
-             items.forEach(item => {
-                 Object.entries(item).forEach(([key, value]) => {
-                     if (key !== 'html') {
-                         definedTerms.add(key.toLowerCase());
-                         definedDefinitions.add(value.trim()); 
-                     }
-                 });
-             });
+            const definedTerms = new Set();
+            const definedDefinitions = new Set();
+            items.forEach(item => {
+                Object.entries(item).forEach(([key, value]) => {
+                    if (key !== 'html') {
+                        definedTerms.add(key.toLowerCase());
+                        definedDefinitions.add(value.trim());
+                    }
+                });
+            });
 
-             items.forEach(item => {
+            items.forEach(item => {
                 Object.entries(item).forEach(([key, value]) => {
                     if (key === 'html') {
                         const tmp = document.createElement('div');
                         tmp.innerHTML = value;
                         const text = tmp.textContent.trim();
                         if (definedTerms.has(text.toLowerCase()) || definedDefinitions.has(text)) return;
-                        
+
                         const div = document.createElement('div');
-                        div.className = 'text-content intro-block'; 
+                        div.className = 'text-content intro-block';
                         div.style.gridColumn = '1 / -1';
-                        div.style.maxWidth = '800px'; 
+                        div.style.maxWidth = '800px';
                         div.style.margin = '0 auto 2rem auto';
                         div.innerHTML = value;
                         dom.grid.appendChild(div);
@@ -287,8 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.innerHTML = `<div class="card-header"><div class="card-title" data-tooltip="${key}">${key}</div></div><div class="card-body"><p style="white-space: pre-wrap;">${value}</p></div>`;
                     dom.grid.appendChild(card);
                 });
-             });
-             return;
+            });
+            return;
         }
 
         items.forEach(item => {
