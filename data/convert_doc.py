@@ -247,28 +247,74 @@ def clean_tag(tag):
             
     return tag
 
+import sys
+import argparse
+import urllib.request
+
+def download_google_doc(doc_id, output_path):
+    url = f"https://docs.google.com/document/d/{doc_id}/export?format=html"
+    print(f"Downloading Google Doc: {doc_id}...")
+    try:
+        with urllib.request.urlopen(url) as response:
+            with open(output_path, 'wb') as f:
+                f.write(response.read())
+        print(f"Successfully downloaded to {output_path}")
+        return True
+    except Exception as e:
+        print(f"Error downloading document: {e}")
+        return False
+
 if __name__ == "__main__":
     import os
     
-    # Ensure we look in the same directory as the script for input/output
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    input_file = os.path.join(script_dir, "doc_export.html")
-    output_js_file = os.path.join(script_dir, "data.js")
-    css_output_file = os.path.join(script_dir, "../dashboard/doc_styles.css")
+    parser = argparse.ArgumentParser(description="Convert Google Doc HTML export to JSON data for On-Set Dashboard.")
+    parser.add_argument("--doc-id", help="Google Doc ID to download automatically (e.g. 13TsptYa5uNO52btOw1nat1cLSBG88t27W3BXHBZPvoc)")
+    parser.add_argument("--input", default="data/doc_export.html", help="Input HTML file path (default: data/doc_export.html)")
+    parser.add_argument("--output", default="data/data.js", help="Output JSON/JS file path (default: data/data.js)")
+    
+    args = parser.parse_args()
+    
+    input_file = args.input
+    output_file = args.output
+    
+    # If Doc ID is provided, download it first
+    if args.doc_id:
+        # Ensure the directory for the input file exists if it's a path
+        input_dir = os.path.dirname(input_file)
+        if input_dir and not os.path.exists(input_dir):
+            os.makedirs(input_dir)
+
+        if download_google_doc(args.doc_id, input_file):
+            print("Download complete. Proceeding to conversion...")
+        else:
+            print("Download failed. Aborting.")
+            sys.exit(1)
+            
+    # Adjust paths to be robust
+    # Convert to absolute paths for consistency, especially for CSS output calculation
+    if not os.path.isabs(input_file):
+        input_file = os.path.abspath(input_file)
+    if not os.path.isabs(output_file):
+        output_file = os.path.abspath(output_file)
+        
+    # Determine CSS output path relative to the output JS file's directory
+    # This assumes the dashboard directory is a sibling of the directory containing the output JS file
+    css_output_file = os.path.join(os.path.dirname(output_file), "../dashboard/doc_styles.css")
     
     print(f"Parsing {input_file}...")
     try:
         json_data = parse_google_doc_html(input_file, css_output_file)
         
+        # Ensure the output directory exists
+        output_dir = os.path.dirname(output_file)
+        if output_dir and not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
         # Write as a JS file with a global variable
-        with open(output_js_file, 'w', encoding='utf-8') as f:
+        with open(output_file, 'w', encoding='utf-8') as f:
             js_content = f"const ON_SET_DATA = {json.dumps(json_data, indent=4)};"
             f.write(js_content)
             
-        # Re-save CSS to the correct dashboard location using absolute path from script
-        # Note: parse_google_doc_html currently saves inside itself, we should refactor that 
-        # but for now let's just make sure the function handles it or we pass the path.
-        # Actually simplest is to modify parse_google_doc_html to take the output path.
         # But to be minimally invasive, we'll patch the path inside the function or just move the CSS writing logic out.
         # Let's check parse_google_doc_html again. It writes to "../dashboard/doc_styles.css" relative to CWD.
         # We should update parse_google_doc_html to use exact path.
@@ -278,7 +324,7 @@ if __name__ == "__main__":
         # OR just update the function here if I included it in the range. 
         # I did include the end of the file, but not the start of parse_google_doc_html. 
         
-        print(f"Successfully converted to {output_js_file}")
+        print(f"Successfully converted to {output_file}")
         
     except FileNotFoundError:
         print(f"Error: {input_file} not found. Make sure you downloaded the HTML export.")
