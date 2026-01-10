@@ -39,6 +39,7 @@ body {
 
 .header-logo {
     height: 40px;
+    vertical-align: bottom;
     /* Adjust size as needed */
     width: auto;
 }
@@ -317,6 +318,28 @@ h1 {
     font-size: 1.25rem;
     color: var(--accent-color);
     font-weight: 500;
+}
+
+/* Tooltips */
+.tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    max-width: 350px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip.visible {
+    opacity: 1;
 }
 
 /* Utilities */

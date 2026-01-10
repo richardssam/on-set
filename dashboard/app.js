@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Lookup for scope descriptions
+    const scopeDescriptions = new Map();
+
     // Helper: Normalize Scope values (Title Case, singularize simple "s")
     function normalizeScope(val) {
         if (!val) return '';
@@ -43,8 +46,50 @@ document.addEventListener('DOMContentLoaded', () => {
         stats: document.getElementById('stats-display'),
         stats: document.getElementById('stats-display'),
         tabs: document.querySelectorAll('.tab-btn'),
-        printBtn: document.getElementById('print-btn')
+        printBtn: document.getElementById('print-btn'),
+        tooltip: document.getElementById('tooltip')
     };
+
+    // Tooltip Logic
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('[data-tooltip]');
+        if (target) {
+            const text = target.dataset.tooltip;
+            if (text) {
+                dom.tooltip.textContent = text; // Or innerHTML if we want basic formatting
+                dom.tooltip.classList.remove('hidden');
+                dom.tooltip.classList.add('visible');
+            }
+        }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (dom.tooltip.classList.contains('visible')) {
+            // Offset from mouse
+            const offset = 15;
+            let left = e.clientX + offset;
+            let top = e.clientY + offset;
+
+            // Simple boundary detection (optional but good)
+            if (left + 350 > window.innerWidth) {
+                left = e.clientX - 350 - offset;
+            }
+            if (top + dom.tooltip.offsetHeight > window.innerHeight) {
+                top = e.clientY - dom.tooltip.offsetHeight - offset;
+            }
+
+            dom.tooltip.style.left = `${left}px`;
+            dom.tooltip.style.top = `${top}px`;
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('[data-tooltip]');
+        if (target) {
+            dom.tooltip.classList.remove('visible');
+            dom.tooltip.classList.add('hidden');
+        }
+    });
 
     // URL Synchronization
     function updateUrlParams() {
@@ -104,6 +149,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     if (typeof ON_SET_DATA !== 'undefined') {
         rawData = ON_SET_DATA;
+
+        // Parse Scope Definitions first
+        if (rawData['Scope Definitions']) {
+            rawData['Scope Definitions'].forEach(item => {
+                // Determine layout (raw dictionary vs header/body objects if any)
+                // Data format seems to be array of objects. Some are HTML headers, others are dictionaries.
+                // Based on data.js inspection, it's mixed. But definitions seem to be single key-value items in the array or rows.
+                // Wait, based on user's data.js view: items can be { "Take": "Definition..." }.
+
+                Object.entries(item).forEach(([key, value]) => {
+                    // Skip if key is "html" (used for header rendering in simple view)
+                    if (key === 'html') return;
+
+                    // Normalize key for lookup
+                    const normalized = normalizeScope(key);
+                    if (normalized) {
+                        scopeDescriptions.set(normalized.toLowerCase(), value);
+                    }
+                });
+            });
+        }
+
         processSpecs(); // Prepare filterable list
 
         loadStateFromUrl(); // Load state before rendering
@@ -146,67 +213,100 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Render Simple List / Text View (Introduction, Directory Structure, Reference Docs, Scope Definitions)
     function renderSimpleView(sectionName) {
         dom.grid.innerHTML = '';
-        dom.grid.classList.add('text-view-mode');
-
-        const items = rawData[sectionName] || [];
-
-        if (items.length === 0) {
-            dom.grid.innerHTML = '<div class="text-content"><h3>No content found.</h3></div>';
-            return;
-        }
-
-        // Special handling for text-block sections (Introduction, Directory Structure, Reference Docs)
-        if (['Introduction', 'Directory Structure', 'Reference Docs'].includes(sectionName)) {
-            const container = document.createElement('div');
-            container.className = 'text-content';
-
-            // Add Section Title
-            const title = document.createElement('h1');
-            title.textContent = sectionName;
-            title.className = 'section-main-title'; // New class for styling if needed
-            title.style.marginBottom = '2rem';
-            title.style.color = 'var(--text-primary)';
-            container.appendChild(title);
-
-            // Assuming first item has the merged HTML
-            if (items[0] && items[0].html) {
-                // parsing HTML string to append vs innerHTML to avoid wiping title
-                const contentDiv = document.createElement('div');
-                contentDiv.innerHTML = items[0].html;
-                container.appendChild(contentDiv);
-            }
-            dom.grid.appendChild(container);
-            return;
-        }
-
-        const container = document.createElement('div');
-        container.className = 'text-content';
-
-        // Add Section Title for Scope Definitions etc
+        dom.sidebar.classList.add('hidden');
+        dom.specsHeader.classList.add('hidden');
+        dom.filterContainer.classList.add('hidden');
+        
+        // Reset Grid Layout
+        dom.grid.classList.remove('text-view-mode');
+        
+        // Add Section Title
         const title = document.createElement('h1');
         title.textContent = sectionName;
         title.className = 'section-main-title';
+        title.style.gridColumn = '1 / -1';
         title.style.marginBottom = '2rem';
         title.style.color = 'var(--text-primary)';
-        container.appendChild(title);
+        dom.grid.appendChild(title);
+
+        const items = rawData[sectionName] || [];
+
+        // Special handling for text-block sections
+        const isTextBlock = ['Introduction', 'Directory Structure', 'Reference Docs'].includes(sectionName);
+
+        if (isTextBlock) {
+             dom.grid.classList.add('text-view-mode');
+             const container = document.createElement('div');
+             container.className = 'text-content';
+             items.forEach(item => {
+                 if (item.html) {
+                     const contentDiv = document.createElement('div');
+                     contentDiv.innerHTML = item.html;
+                     container.appendChild(contentDiv);
+                 }
+             });
+             dom.grid.appendChild(container);
+             return;
+        }
+
+        if (sectionName === 'Scope Definitions') {
+             const definedTerms = new Set();
+             const definedDefinitions = new Set();
+             items.forEach(item => {
+                 Object.entries(item).forEach(([key, value]) => {
+                     if (key !== 'html') {
+                         definedTerms.add(key.toLowerCase());
+                         definedDefinitions.add(value.trim()); 
+                     }
+                 });
+             });
+
+             items.forEach(item => {
+                Object.entries(item).forEach(([key, value]) => {
+                    if (key === 'html') {
+                        const tmp = document.createElement('div');
+                        tmp.innerHTML = value;
+                        const text = tmp.textContent.trim();
+                        if (definedTerms.has(text.toLowerCase()) || definedDefinitions.has(text)) return;
+                        
+                        const div = document.createElement('div');
+                        div.className = 'text-content intro-block'; 
+                        div.style.gridColumn = '1 / -1';
+                        div.style.maxWidth = '800px'; 
+                        div.style.margin = '0 auto 2rem auto';
+                        div.innerHTML = value;
+                        dom.grid.appendChild(div);
+                        return;
+                    }
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.marginBottom = '1.5rem';
+                    card.innerHTML = `<div class="card-header"><div class="card-title" data-tooltip="${key}">${key}</div></div><div class="card-body"><p style="white-space: pre-wrap;">${value}</p></div>`;
+                    dom.grid.appendChild(card);
+                });
+             });
+             return;
+        }
 
         items.forEach(item => {
-            // Each item might be a dictionary of multiple definitions (from a table)
+            if (item.html) {
+                const div = document.createElement('div');
+                div.className = 'text-content';
+                if (!dom.grid.classList.contains('text-view-mode')) {
+                    div.style.gridColumn = '1 / -1';
+                }
+                div.innerHTML = item.html;
+                dom.grid.appendChild(div);
+                return;
+            }
             Object.entries(item).forEach(([key, value]) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.style.marginBottom = '1.5rem';
-
-                card.innerHTML = `
-                    <div class="card-header">
-                        <div class="card-title">${key}</div>
-                    </div>
-                    <div class="card-body">
-                        <p style="white-space: pre-wrap;">${value}</p>
-                    </div>
-                `;
+                card.innerHTML = `<div class="card-header"><div class="card-title">${key}</div></div><div class="card-body"><p style="white-space: pre-wrap;">${value}</p></div>`;
                 dom.grid.appendChild(card);
             });
         });
@@ -287,6 +387,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 label.appendChild(input);
                 label.appendChild(document.createTextNode(value));
+                if (type === 'scope') {
+                    // Try to match description
+                    // The value is already normalized (e.g. "Take")
+                    const desc = scopeDescriptions.get(value.toLowerCase());
+                    if (desc) {
+                        // label.title = desc; // Removed native tooltip
+                        label.dataset.tooltip = desc;
+                    }
+                }
+
                 container.appendChild(label);
             });
 
@@ -393,7 +503,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tags
         const creatorTags = creators.map(c => `<span class="tag">${c}</span>`).join('');
         const consumerTags = consumers.map(c => `<span class="tag">${c}</span>`).join('');
-        const scopeTags = scope.map(s => `<span class="tag">${s}</span>`).join('');
+        const scopeTags = scope.map(s => {
+            const desc = scopeDescriptions.get(s.toLowerCase()) || '';
+            const tooltipAttr = desc ? ` data-tooltip="${desc.replace(/"/g, '&quot;')}"` : '';
+            return `<span class="tag"${tooltipAttr}>${s}</span>`;
+        }).join('');
 
         // Build Body Content
         // We want to exclude Creator/Consumer from general fields, but show everything else.
