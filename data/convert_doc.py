@@ -112,6 +112,37 @@ def parse_google_doc_html(html_path, output_css_path=None):
                      current_h1_obj = None # Stop capturing for this section
                      continue
 
+                 # Special deduplication for Scope Definitions:
+                 # If we are in Scope Definitions, and the text matches a Key or Value from a previously parsed table, skip it.
+                 if current_h1_obj and current_h1_obj["title"] == "Scope Definitions":
+                     is_duplicate = False
+                     # Iterate over existing items in this section (which might include the Table parsed earlier)
+                     for item in target_list:
+                         for k, v in item.items():
+                             if k == "html": continue
+                             # Check if text matches Key (exact)
+                             if text_content == k:
+                                 is_duplicate = True
+                                 break
+                             # Check if text is part of Value (substring)
+                             # We use strict equality for Key, but substring for Value to catch split paragraphs.
+                             # Safety check: text should be reasonably long to avoid false positives with short words.
+                             if isinstance(v, str):
+                                 clean_v = v.replace('\n', ' ').strip()
+                                 content_check = text_content.replace('\n', ' ').strip()
+                                 if content_check == clean_v:
+                                     is_duplicate = True
+                                     break
+                                 # Partial match buffer
+                                 if len(content_check) > 10 and content_check in clean_v:
+                                      is_duplicate = True
+                                      break
+                                      
+                         if is_duplicate: break
+                     
+                     if is_duplicate:
+                         continue
+
                  if content:
                     target_list.append({"html": f"<{el.name}>{content}</{el.name}>"})
 
