@@ -1,0 +1,1616 @@
+{
+    "Scope Definitions": [
+        {
+            "Take": "A \u201ctake\u201d in film production is a single continuous recorded performance of a particular shot or scene, starting when the director calls \u201caction\u201d and ending when they call \u201ccut\u201d. Multiple takes are often shot to capture different versions, allowing choices in editing to present the best performance or technical execution.",
+            "Slate": "A \u201cslate\u201d refers to the clapperboard, a tool displayed in front of the camera at the start of a take, used to visually and audibly record details like the scene, shot, and take numbers for identification in post production. The slate ensures each take is uniquely labeled, aiding editors and VFX teams in tracking footage through the workflow.",
+            "Setup": "In film production, a \u201csetup\u201d refers to the arrangement of camera position, lighting scheme, actor blocking, props, and set dressing that is required to capture one or more shots from a specific viewpoint or configuration. Each setup is distinct, and a new setup occurs whenever any of these elements\u2014especially the camera position or lighting\u2014are changed to achieve a different shot or look. This concept is key in scheduling and organizing a shoot efficiently, as multiple shots can sometimes be filmed from a single setup before moving equipment to create a new one",
+            "Lighting setup": "The exact configuration of on-set lighting deployed, often varies per take. Proper lighting is crucial for both live-action and VFX integration.",
+            "Character": "A \u201ccharacter\u201d in film production is any fictional or real persona portrayed by an actor or performer within a story. The character is defined by specific traits, behaviors, and a narrative role, serving as a key element that drives the plot, interacts with other characters, and helps communicate the film\u2019s themes. Each character is assigned to a performer and may be tracked during production and post production for continuity and VFX needs. A type of Asset but distinct from sets and props.",
+            "Vehicle": "Film Vehicles: Vehicles that appear on camera within scenes, such as cars, motorcycles, or trucks driven by actors or used as part of the story. Production Vehicles: Specialized vehicles used behind the scenes to transport equipment, crew, or provide mobile workspace. Examples include grip and electric trucks carrying lighting and rigging gear, camera trucks with specialized mounts and climate control for camera equipment, wardrobe and makeup trucks for talent preparation, and production office trucks for administrative use. These vehicles are critical for logistical support and smooth operation on location. Vehicle Rigs: For filming car scenes especially, production vehicles may be outfitted with camera mounts, lighting setups, and power supplies to enable dynamic shots while in motion (camera cars). Thus, vehicles play both an on-screen storytelling role and an off-screen supporting role essential to film production logistics, equipment transport, and specialized shooting setup As with character, a sub category of Asset.",
+            "Camera": "Referring to the back-end capture device body (typically not including the lens). A \u201ccamera\u201d in filmmaking is the device used to capture the visual elements of a film or video. It records scenes and shots, translating the director\u2019s and cinematographer\u2019s vision into moving images.",
+            "Lens": "Referring to the front-end capture device, can differ per take. A \u201clens\u201d in filmmaking is an optical device attached to the camera that focuses and controls how light enters the camera sensor or film to capture an image. The lens affects the image\u2019s sharpness, perspective, depth of field, field of view, and overall aesthetic",
+            "Shot": "A continuous sequence of frames captured without interruption. In VFX, a shot is the segment that requires visual effects work and is defined by the camera running from \u201cstart\u201d to \u201cstop,\u201d making it a basic unit for VFX budgeting and scheduling.",
+            "Sequence": "A \u201csequence\u201d is a series of shots that together form a distinct unit of the film, often representing a complete scene or action where they are thematically or logically connected. Sequences help organize the film\u2019s narrative and VFX planning.",
+            "Set": "The physical build created by the Art Department or procured by Production for the purposes of filming.",
+            "Production location": "Production location refers to the specific place where filming occurs, either outdoors or indoors, which may be an actual place or a set constructed to represent that place. Locations influence how scenes are lit, filmed, and what VFX may be required for environmental enhancements.",
+            "Virtual stage": "The environment which integrates physical and virtual production. Typically a set of LED panels, projection screens and/or process screens for keying.",
+            "Prop": "A prop is any physical object used by actors or set dressing present in a scene that isn\u2019t part of the set or costume, Props add realism, serve storytelling functions, and may include practical items on-set or digital objects inserted via VFX.",
+            "Actor": "An actor is a performer who plays a character in a film. Actors deliver dialogue, interact with other performers and with practical or digital elements in scenes, and are often the core focus for integrating visual effects.",
+            "Animal performer": "An animal performer is any trained animal used in place of a human actor in certain scenes or shots. Animal performers might be real or represented by digital doubles with VFX for safety, realism, or creative reasons.",
+            "Character_per_take": "This refers to tracking which character(s) appear in each filmed take. A \u201ctake\u201d is a single attempt at recording a shot, and documenting \u201ccharacter_per_take\u201d is essential for VFX teams to plan the required work for each character\u2019s appearance and interaction in a scene.",
+            "Performance": "In some circumstances an actor may be required to create multiple performances in a single take.",
+            "Extras": "Extras, also known as background actors or atmosphere players, are performers who fill out a scene to create a realistic background. They usually do not have lines but add to the authenticity of the environment by representing crowds, passersby, or bystanders.",
+            "Physical asset": "A physical asset in filmmaking includes tangible items such as set pieces, costumes, props, camera equipment, or any real object physically present on set, relevant for reference or interaction by actors - including those later replaced or enhanced by VFX.",
+            "Digital and artistic assets": "Digital and artistic assets refer to computer-generated elements like 3D models, matte paintings, visual effects layers. and animation files. These are created by VFX artists and inserted into scenes to realize effects, creatures, environments, or otherwise enhance or alter the filmed footage digitally."
+        }
+    ],
+    "1.1 Manual Camera Data Collection": [
+        {
+            "Data Collected": [
+                "Roll, slate, take",
+                "Lens, f-stop, T-Stop, ND, filter",
+                "FPS",
+                "Camera height, start and end distances",
+                "Camera orientation and GPS/gyro data",
+                "Notes",
+                "OpenTrackIO /OpenLensIO - camera & lens tracking data"
+            ],
+            "Description": "These are the foundational data points manually recorded on set for each shot.",
+            "Usage": "Used for identifying shots, providing essential camera settings for matchmoving and compositing, potential backup for automatic capture pipeline.",
+            "Scope": [
+                "Shot",
+                "Take",
+                "Setup"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "Camera department",
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "Postviz vendor",
+                "3D conversion vendor",
+                "2nd unit",
+                "Additional photography team",
+                "Studio marketing for commercial or game creation"
+            ]
+        }
+    ],
+    "1.2 Camera Type & Model": [
+        {
+            "Data Collected": [
+                "Camera type & model (e.g., ARRI, RED, Sony Venice)",
+                "Sensor size.",
+                "Aspect Ratio",
+                "Colour space",
+                "Standard Pad - (how much padding around the frame do you add for stabilization, post-repo, 3D conversion) - e.g. 5%.",
+                "ASC FDL - Frame Decision List",
+                "Frame rate/shutter angle"
+            ],
+            "Description": "Specifies the exact camera used, which can affect image characteristics. Note, this should include reference cameras. Wherever possible the reference cameras should be jammed to the master TC on-set.",
+            "Usage": "Ensures correct camera profiles are applied throughout the pipeline.",
+            "Scope": [
+                "Camera"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "Camera department"
+            ],
+            "Consumer": [
+                "Dailies and DI vendor",
+                "VFX post production vendors",
+                "Previz vendors",
+                "Post production vendor",
+                "3D conversion vendor",
+                "Additional photography team",
+                "Studio marketing",
+                "VFX editorial"
+            ]
+        }
+    ],
+    "1.3 Per take Sensor Metadata": [
+        {
+            "Data Collected": [
+                "ISO"
+            ],
+            "Description": "Information about the camera's sensor settings. Applies to film or digital cameras.",
+            "Usage": "Crucial for colour grading and matching the digital footage to the live action.",
+            "Scope": [
+                "Take",
+                "Camera"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data Wrangler"
+            ],
+            "Consumer": [
+                "Dailies and DI vendor",
+                "VFX post production vendors",
+                "Previz vendors",
+                "3D conversion vendor",
+                "2nd unit",
+                "Additional photography team"
+            ]
+        }
+    ],
+    "1.4 Per Camera Lens Specifications": [
+        {
+            "Data Collected": [
+                "Focal length",
+                "Distortion profile using standard lens grid charts, done prior to shoot in lens rental shop",
+                "Lens characteristics - flare, aberrations, coatings",
+                "Spherical or Anamorphic"
+            ],
+            "Description": "Key parameters for the lens used, captured per camera body.",
+            "Usage": "Essential for recreating the lens in CG and correcting distortion. Ensure the on-set data collection meets vendor pipeline needs.",
+            "Scope": [
+                "Lens"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data Wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "3D conversion vendor",
+                "Studio marketing for commercial or game creation",
+                "VFX editorial"
+            ]
+        }
+    ],
+    "1.5 Lens Encoder Tracking Data": [
+        {
+            "Data Collected": [
+                "Real-time lens settings during the shot"
+            ],
+            "Description": "Dynamic data from lens encoders.",
+            "Usage": "Ensures accurate matchmoving, especially with variable focal lengths.",
+            "Scope": [
+                "Lens"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data Wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "3D conversion vendor",
+                "Studio marketing for commercial or game creation",
+                "VFX editorial"
+            ]
+        }
+    ],
+    "1.6 Camera Depth Information": [
+        {
+            "Data Collected": [
+                "Depth data from LIDAR on camera rig",
+                "Range finder on camera for focus",
+                "Depth camera or sensor fused camera (Depth +RGB)"
+            ],
+            "Description": "Data used to calculate distances.",
+            "Usage": "Aids in creating a full 3D model.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data Wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "3D conversion vendor",
+                "Studio marketing for commercial or game creation"
+            ]
+        }
+    ],
+    "2.1 Multiple Witness Cameras": [
+        {
+            "Data Collected": [
+                "Multiple angles for tracking actor positions",
+                "Practical vs. CG interaction data"
+            ],
+            "Description": "Footage from additional cameras to aid tracking.",
+            "Usage": "Improves accuracy of 3D tracking and character placement.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "VFX production team",
+                "Camera operator or camera fixed to principal camera (simulcam-like setup)"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "Studio marketing for Behind-The-Scenes content",
+                "If cameras are placed to capture head-to-toe actors (and preferably synched) can be used for postviz-level mocap."
+            ]
+        }
+    ],
+    "2.2 Overhead & Wide-Angle BTS Coverage": [
+        {
+            "Data Collected": [
+                "Wide context shots",
+                "Behind-The-Scenes angles"
+            ],
+            "Description": "Footage to provide additional information for the scene set up.",
+            "Usage": "Helps maintain continuity, resolve issues, and provide reference for set and actor positions.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "VFX production team",
+                "Camera operator if camera fixed to principal camera"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "Studio marketing for Behind The Scenes content"
+            ]
+        }
+    ],
+    "2.3 Real-World Depth Information": [
+        {
+            "Data Collected": [
+                "Stereoscopic reference cameras"
+            ],
+            "Description": "Captures depth information of the set.",
+            "Usage": "Accurate scene reconstruction for CG elements.",
+            "Scope": [
+                "Set",
+                "Setup"
+            ],
+            "Creator": [
+                "VFX production team",
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "Art department during principal photography",
+                "Previz vendors",
+                "Stunt team during principal photography",
+                "VFX post production vendors",
+                "Studio marketing for game or commercial creation"
+            ]
+        }
+    ],
+    "3.1 Camera Reports": [
+        {
+            "Data Collected": [
+                "Logs of camera settings, takes, and any issues encountered.",
+                "Realtime and virtual production reports"
+            ],
+            "Description": "Important documentation for each shot.",
+            "Usage": "Helps track and ensure all necessary data is available for each VFX shot, and \u201chot costs\u201d / unbudgeted or unforeseen overages. Useful for matching set-ups in additional photography and 2nd unit.",
+            "Scope": [
+                "Setup",
+                "Take"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "Camera department",
+                "Script supervisor"
+            ],
+            "Consumer": [
+                "Editorial",
+                "Script Supervisor",
+                "VFX post production vendors",
+                "2nd unit",
+                "Additional photography team",
+                "Previz vendors",
+                "Art department",
+                "Hot cost reports:"
+            ]
+        }
+    ],
+    "3.2 Clips Report": [
+        {
+            "Data Collected": [
+                "Daily Report of all clips generated by the camera team"
+            ],
+            "Description": "Ensures all clips are accounted for, fail safe for data wrangler reports.",
+            "Usage": "Used for tracking and data confirmation.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Camera department",
+                "DIT"
+            ],
+            "Consumer": [
+                "Dailies vendor",
+                "Editorial",
+                "Script supervisor",
+                "VFX data wrangler",
+                "VFX DPM"
+            ]
+        }
+    ],
+    "3.3 Shooting Day Report": [
+        {
+            "Data Collected": [
+                "Summary of the day's shooting activities"
+            ],
+            "Description": "Documentation used to ensure all parts of the schedule are completed and logged.",
+            "Usage": "Helps coordinate resources for the next day, track shot costs.",
+            "Scope": [
+                "Shot"
+            ],
+            "Creator": [
+                "Script supervisor",
+                "AD department"
+            ],
+            "Consumer": [
+                "First AD",
+                "Script supervisor",
+                "Line producer",
+                "UPM",
+                "VFX producer",
+                "VFX editorial"
+            ]
+        }
+    ],
+    "3.4 Sound Report": [
+        {
+            "Data Collected": [
+                "Detailed logs of sound takes and equipment used"
+            ],
+            "Description": "Notes and records of the audio take. When working with Virtual Production & MoCap discuss sync sound",
+            "Usage": "Used to sync the sound and visual elements.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Sounds department"
+            ],
+            "Consumer": [
+                "Editorial",
+                "VFX department",
+                "Virtual production department",
+                "Motion capture"
+            ]
+        }
+    ],
+    "3.5 Schedule and One-Liner": [
+        {
+            "Data Collected": [
+                "Scene-based schedule",
+                "One-line summaries of scenes"
+            ],
+            "Description": "Outlines the filming schedule for the scenes shot.",
+            "Usage": "Used to plan out each stage of filming and shooting, organized by scene rather than shot. Used to reference back to a shot by date, scene and production location.",
+            "Scope": [
+                "Scene"
+            ],
+            "Creator": [
+                "AD department"
+            ],
+            "Consumer": [
+                "Entire film crew",
+                "All departments",
+                "Actors",
+                "Studio",
+                "Producers",
+                "Editorial",
+                "Dailies vendor",
+                "Post production"
+            ]
+        }
+    ],
+    "3.6 Script Supervisor Notes": [
+        {
+            "Data Collected": [
+                "Notes on continuity, performance, and other important details"
+            ],
+            "Description": "Notes about each take and filming session.",
+            "Usage": "Helps the VFX team maintain continuity and compare to data wrangler notes.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Script Supervisor"
+            ],
+            "Consumer": [
+                "Editorial",
+                "Camera department",
+                "AD department",
+                "VFX department",
+                "Costume department",
+                "Hair and makeup",
+                "Sound department",
+                "2nd unit team",
+                "Additional photography team"
+            ]
+        }
+    ],
+    "4.1 Colour Charts": [
+        {
+            "Data Collected": [
+                "Shots of standard colour charts under the scene lighting"
+            ],
+            "Description": "Charts with known colour values.",
+            "Usage": "Used for colour calibration and grading.",
+            "Scope": [
+                "Setup"
+            ],
+            "Creator": [
+                "Data wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "4.2 HDRIs": [
+        {
+            "Data Collected": [
+                "360\u00b0 HDR images of the set lighting per camera setup"
+            ],
+            "Description": "Captures a full light spectrum.",
+            "Usage": "Enables accurate recreation of on-set lighting in CG.",
+            "Scope": [
+                "Lighting setup"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "VFX onset vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation"
+            ]
+        }
+    ],
+    "4.3 Lighting Reference Objects/Props": [
+        {
+            "Data Collected": [
+                "Props designed for VFX lighting reference"
+            ],
+            "Description": "Objects included to properly measure the lighting, made from materials that emulate the CG object to be added e.g. Fur, metal, skin, plastic\u2026",
+            "Usage": "Provides additional lighting information for digital recreation",
+            "Scope": [
+                "Lighting setup"
+            ],
+            "Creator": [
+                "SFX vendor",
+                "Model or prosthetic companies",
+                "Prop department",
+                "Art department",
+                "Stunts department"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation"
+            ]
+        }
+    ],
+    "4.4 DMX/Lighting Control Metadata": [
+        {
+            "Data Collected": [
+                "Tracked data of lighting controlled by DMX"
+            ],
+            "Description": "Notes on the lighting for each take.",
+            "Usage": "Helps to recreate the scene accurately, useful for interactive lighting.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Virtual Production Stage",
+                "Gaffer",
+                "Post Production"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Virtual production",
+                "Post production"
+            ]
+        }
+    ],
+    "4.5 Light Sources & Colour Temperature": [
+        {
+            "Data Collected": [
+                "Record of the light source"
+            ],
+            "Description": "Temperature and intensity of the light being emitted on set.",
+            "Usage": "CG lighting and scene matching.",
+            "Scope": [
+                "Lighting setup"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "Camera department"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz vendors",
+                "Additional photography team"
+            ]
+        }
+    ],
+    "4.6 Shadow Behavior & Falloff": [
+        {
+            "Data Collected": [
+                "Recording of the shadow cast and fall off"
+            ],
+            "Description": "The shape and intensity of the shadow.",
+            "Usage": "To accurately portray the falloff of light on the subject and define the scale and distance of the light source.",
+            "Scope": [
+                "Lighting setup"
+            ],
+            "Creator": [
+                "Data Wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz vendors",
+                "Additional photography team"
+            ]
+        }
+    ],
+    "5.1 LIDAR Scans / Texture Photography": [
+        {
+            "Data Collected": [
+                "3D point cloud data of the set geometry",
+                "High resolution photographic textures"
+            ],
+            "Description": "Physical set environment capture.",
+            "Usage": "Used in CGI to recreate the physical set and aid in camera matchmoving. Art dept to aid in virtual set build.",
+            "Scope": [
+                "Set",
+                "Production location"
+            ],
+            "Creator": [
+                "VFX on-set capture vendor",
+                "Data wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz",
+                "Stunt team",
+                "Art department",
+                "Vendor creating LED volume content",
+                "VFX production team in additional photography"
+            ]
+        }
+    ],
+    "5.2 Prop Scans": [
+        {
+            "Data Collected": [
+                "High-resolution scans of props including textures"
+            ],
+            "Description": "Scans that allow for accurate CG prop creation.",
+            "Usage": "Used to replicate props in CGI with correct materials and geometry.",
+            "Scope": [
+                "Prop"
+            ],
+            "Creator": [
+                "Prop department",
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendor s",
+                "Studio marketing for commercial or game creation",
+                "Stunt team",
+                "Art department",
+                "Additional photography team"
+            ]
+        }
+    ],
+    "5.3 Photogrammetry": [
+        {
+            "Data Collected": [
+                "Multiple photographs from different angles to create 3D models"
+            ],
+            "Description": "Used for set geometry in CGI reconstruction.",
+            "Usage": "Provides detailed models for CG integration.",
+            "Scope": [
+                "Set",
+                "Props",
+                "Actors",
+                "Animal performers"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Stunt team",
+                "Art department",
+                "Additional photography team",
+                "Previz vendor s"
+            ]
+        }
+    ],
+    "5.4 NERFs, Gaussian Splats": [
+        {
+            "Data Collected": [
+                "New methods of capturing geometry and appearance"
+            ],
+            "Description": "Used to make more accurate models. Useful if unable to scan or lidar.",
+            "Usage": "Provides advanced methods for geometry and appearance capture.",
+            "Scope": [
+                "Set",
+                "Setup"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Stunt previz team",
+                "Art department",
+                "Additional photography team",
+                "Previz vendor s",
+                "Virtual Production / ICVFX"
+            ]
+        }
+    ],
+    "5.5 Face Scans, Body Scans": [
+        {
+            "Data Collected": [
+                "Detailed scans of actors for digital doubles",
+                "Light stage multi spectral capture",
+                "FACS range of expression capture"
+            ],
+            "Description": "Used to create CGI doubles of the actors.",
+            "Usage": "Used for digital human creation.",
+            "Scope": [
+                "Character",
+                "Actor"
+            ],
+            "Creator": [
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz vendors",
+                "Animation / Cinematics vendors"
+            ]
+        }
+    ],
+    "5.6 Set Reference Photography": [
+        {
+            "Data Collected": [
+                "Massive amounts of photo graphic reference"
+            ],
+            "Description": "Pictures used for continuity and unforeseen requirements.",
+            "Usage": "Used for textures and modeling . Provides continuity and in context references.",
+            "Scope": [
+                "Set"
+            ],
+            "Creator": [
+                "Data Wrangler",
+                "Camera Department"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for Behind The Scenes content"
+            ]
+        }
+    ],
+    "5.7 Costume, Face Marker, and T-Pose Reference": [
+        {
+            "Data Collected": [
+                "Specific poses and marker placements for accurate tracking, per day. (If dots are re-applied, additional reference needs to be captured with exact timestamps, this allows correlation with motion picture photography.)",
+                "Still and motion picture photography"
+            ],
+            "Description": "Data acquired from body and face tracking.",
+            "Usage": "Accurate motion tracking for character animation or live action enhancements.",
+            "Scope": [
+                "Actors",
+                "Extras"
+            ],
+            "Creator": [
+                "VFX on-set capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz vendors"
+            ]
+        }
+    ],
+    "5.8 Reference of Vehicles, Props, Production Locations": [
+        {
+            "Data Collected": [
+                "Extensive reference still photography",
+                "Physical distance measurements",
+                "LIDAR set scanning",
+                "Photogrammetry"
+            ],
+            "Description": "Measurements, photos, and data about the vehicle, prop, or production location. Depending on the vehicle VFX may need to take photogrammetry reference twice, once per on-camera usage and once with a dulling spray or dusting to remove specular information.",
+            "Usage": "For recreation of CGI of the production location, prop, or vehicle.",
+            "Scope": [
+                "Vehicle",
+                "Set",
+                "Prop"
+            ],
+            "Creator": [
+                "VFX on-set capture vendor",
+                "Data wrangler"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Previz vendors"
+            ]
+        }
+    ],
+    "6.1 Camera Tech Specs": [
+        {
+            "Data Collected": [
+                "Graticule / frame guide",
+                "Resolution",
+                "Colour space",
+                "Camera native ISO"
+            ],
+            "Description": "Camera tech spec for calibration.",
+            "Usage": "Supports correct image processing in dailies and final extraction. Work safe area of the image and guide for multiple delivery formats. CG integration. This gets modified through production as additional cameras are added .",
+            "Scope": [
+                "Camera"
+            ],
+            "Creator": [
+                "Data wrangler",
+                "Camera department"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Dailies and Digital Intermediate vendor",
+                "Camera department",
+                "Previz vendors"
+            ]
+        }
+    ],
+    "6.2 DIT Specs": [
+        {
+            "Data Collected": [
+                "Pregrade, Color Decision List (CDL). If DP / DIT have done single frame looks beyond standard CDLs those should be requested for post production / DI.",
+                "ASC Media Hash List (MHL)",
+                "ASC Framing Decision List (FDL)"
+            ],
+            "Description": "Used to ensure colour accurate rendering , inline with onset DoP colour decisions.",
+            "Usage": "Ensure proper colour grading throughout the entire pipeline. In some instances CG integration is easier to composite on a graded image compared to the raw image.",
+            "Scope": [
+                "Scene",
+                "Take"
+            ],
+            "Creator": [
+                "Director of photography",
+                "Digital imaging Technician (DIT)",
+                "Post production dailies vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Studio marketing for commercial or game creation",
+                "Digital intermediateI vendor",
+                "Camera department"
+            ]
+        }
+    ],
+    "6.3 Lens Specification": [
+        {
+            "Data Collected": [
+                "Lens size."
+            ],
+            "Description": "Director of photography defines what lenses will be used for previz purposes",
+            "Usage": "Used to match the DoP lens decisions by Previz and post vendors",
+            "Scope": [
+                "Lens"
+            ],
+            "Creator": [
+                "Camera Department",
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "Previz vendors",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "7.1 Previz/Techviz": [
+        {
+            "Data Collected": [
+                "Pre-visualization data",
+                "Technical visualization data"
+            ],
+            "Description": "Creative and technical visualization data used to plan live action photography, typically derived from production storyboards.",
+            "Usage": "An animated guide for all departments based on real world specs. Helps determine camera shooting equipment, greenscreen size and placement etc. Used to guide asset creation and look development. Used to pitch a sequence or idea to the studio or client.",
+            "Scope": [
+                "Sequence",
+                "Shot"
+            ],
+            "Creator": [
+                "Previz vendors",
+                "VFX production team"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "Assistant Director",
+                "Director",
+                "Producers",
+                "Studio",
+                "Stunt team",
+                "Special effects",
+                "Art department",
+                "Entire crew pending approvals and confidentiality"
+            ]
+        }
+    ],
+    "7.2 Concept Art, Lookdev, Character Designs, R&D, Storyboards": [
+        {
+            "Data Collected": [
+                "Visual development materials from the VFX vendors and freelance concept artists"
+            ],
+            "Description": "Early development materials from the VFX vendor and freelance concept artists. This includes but it not limited to, reference materials, mood boards, key art, test animation cycles, storyboards, sculpts, character design, visualization materials.",
+            "Usage": "Used to guide asset creation and look development.",
+            "Scope": [
+                "Entire production"
+            ],
+            "Creator": [
+                "Concept artists",
+                "VFX vendor art department"
+            ],
+            "Consumer": [
+                "Entire onset crew to see director\u2019s vision",
+                "Studio Executives when pitching concepts",
+                "Studio marketing for Behind The Scenes content",
+                "Previz vendors",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "8.1 Mocap Suit Tracking": [
+        {
+            "Data Collected": [
+                "Data from motion capture suits"
+            ],
+            "Description": "The process of recording an actor\u2019s physical performance, body, face, hands, or full movement and translating it into 3D animation data that can drive digital characters, creatures, digital doubles, or previs/postvis assets.",
+            "Usage": "Drives digital character animation.",
+            "Scope": [
+                "Take",
+                "Character_per_take"
+            ],
+            "Creator": [
+                "Stunt team",
+                "Actors",
+                "Motion Capture Vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "Game studios"
+            ]
+        }
+    ],
+    "8.2 Performance Capture Facial Tracking[b]": [
+        {
+            "Data Collected": [
+                "Data from facial tracking systems"
+            ],
+            "Description": "Facial performance capture records an actor\u2019s detailed facial movements, muscle actions, expressions, lip shapes, eye motion, and subtle micro-expressions -to create high-fidelity animation for a digital character. The system extracts precise motion data from markers, solves it to a facial rig, and provides animators with a trackable, frame-accurate representation of the actor\u2019s performance.",
+            "Usage": "Drives digital double / digital character..",
+            "Scope": [
+                "Take",
+                "Character_per_take"
+            ],
+            "Creator": [
+                "Actors",
+                "Motion capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "8.3 Hand/Finger Tracking": [
+        {
+            "Data Collected": [
+                "Data from hand/finger tracking systems",
+                "Optical marker positions",
+                "Inertial sensor data",
+                "Depth camera data",
+                "Glove sensor data"
+            ],
+            "Description": "Hand and finger tracking captures detailed palm and finger joint motion, which is solved and mapped onto digital characters to reproduce the actor's natural gestures and hand performance.",
+            "Usage": "Digital human or creature hands driven directly from actor performance.",
+            "Scope": [
+                "Take",
+                "Character_per_take"
+            ],
+            "Creator": [
+                "Actors",
+                "Motion capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendo rs",
+                "Game studios"
+            ]
+        }
+    ],
+    "8.4 Raw Animation Data & Retargeting Settings[c]": [
+        {
+            "Data Collected": [
+                "Unprocessed motion curves output by tracking system",
+                "Direct marker trajectories, sensor data, or initial joint solves",
+                "Scale adjustments, joint alignment, rotation mappings",
+                "Rig-specific controls"
+            ],
+            "Description": "Raw animation data and retargeting settings describe the post-capture stage of the pipeline. The system collects raw body-motion capture data, including marker or sensor trajectories, joint transforms, and the associated retargeting settings required to accurately map the performer\u2019s movements onto the digital character rig.",
+            "Usage": "Drives digital character animation. The captured raw motion data and retargeting settings are used to solve the performer\u2019s movement into a clean animation rig and accurately transfer that motion onto the digital character for final animation and simulation workflows. Ensures believable motion on rigs with different proportions",
+            "Scope": [
+                "Take",
+                "Character_per_take",
+                "Performance"
+            ],
+            "Creator": [
+                "Actors",
+                "Motion capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors",
+                "Game studios"
+            ]
+        }
+    ],
+    "8.5 Motion Capture Volume Data": [
+        {
+            "Data Collected": [
+                "Spatial position of m arkers and tracking points in physical motion capture volume"
+            ],
+            "Description": "To accurately place and manipulate CGI objects in virtual space.",
+            "Usage": "Used in alignment of CGI and the set, for instance to add digital set extensions.",
+            "Scope": [
+                "Set"
+            ],
+            "Creator": [
+                "Motion capture vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Game studios"
+            ]
+        }
+    ],
+    "9.1 Camera Tracking Data": [
+        {
+            "Data Collected": [
+                "Camera position",
+                "Camera rotation",
+                "Sensor detail",
+                "Lens intrinsics",
+                "Lens metadata",
+                "Vendor specific data formats"
+            ],
+            "Description": "Positional data and lens intrinsics.",
+            "Usage": "Ensures CGI follows camera movements precisely.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data wrangler",
+                "VFX production team"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Previz vendors"
+            ]
+        }
+    ],
+    "9.2 Timecode Sync & Genlock": [
+        {
+            "Data Collected": [
+                "Phase offset",
+                "Sync source",
+                "Sensor start",
+                "Sync pulse",
+                "Sensor readout time",
+                "Timecode & genlock alignment for LED volume, camera, tracking systems",
+                "Frame rate",
+                "Shutter angle",
+                "Timecode per frame",
+                "Precision Timing Protocol (PTP) timestamp",
+                "Genlock status"
+            ],
+            "Description": "Timecode associated with multiple media elements (audio, camera)",
+            "Usage": "Ensures all systems are synchronized.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Camera department",
+                "Motion capture vendor"
+            ],
+            "Consumer": [
+                "Camera",
+                "Audio",
+                "Virtual production",
+                "Post production vendors"
+            ]
+        }
+    ],
+    "9.3 IMU Data": [
+        {
+            "Data Collected": [
+                "X,Y,Z axis",
+                "Acceleration",
+                "Motion shake",
+                "Gravity vector"
+            ],
+            "Description": "Inertial Measurement Unit data for movement analysis, pitch / yaw / roll.",
+            "Usage": "Improves stabilization of virtual camera.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Camera department",
+                "Data wrangler"
+            ],
+            "Consumer": [
+                "Virtual production",
+                "Motion capture vendor",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "10.1 Volume Layout & Dimensions[d]": [
+        {
+            "Data Collected": [
+                "Size, arrangement and specifications of LED panels",
+                "3D mesh of LED volume from LIDAR scan",
+                "Lighting plot",
+                "CAD models to convert to real-time graphics engine meshes"
+            ],
+            "Description": "LED volume physical layout.",
+            "Usage": "A ccurate mapping between virtual volume physical dimensions and realtime graphics engine rendering and/or media playback.",
+            "Scope": [
+                "Virtual stage"
+            ],
+            "Creator": [
+                "LED design vendor",
+                "Virtual art department"
+            ],
+            "Consumer": [
+                "Virtual production stage team",
+                "Virtual art department",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "10.2 Display Frustum Calibration": [
+        {
+            "Data Collected": [
+                "Frustum data via real-time graphics engine or media server"
+            ],
+            "Description": "Accurate data for parallax tracking.",
+            "Usage": "Guarantee proper perspective between physical and virtual camera. Used to sync camera and frustum rendering. Derive a usable protection matrix with frustum planes for tracking, ray-tracing and compositing with the real-time graphics engine.",
+            "Scope": [
+                "Virtual stage"
+            ],
+            "Creator": [
+                "Virtual production supervisor",
+                "Virtual production technical director"
+            ],
+            "Consumer": [
+                "Virtual production stage team",
+                "Postviz vendor (camera path smoothing)",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "10.3 Colour Profile & Brightness Settings": [
+        {
+            "Data Collected": [
+                "Consistent light output",
+                "Photometric response",
+                "Pixel accuracy and alignment calibration"
+            ],
+            "Description": "Calibration and color management from assets, virtual art department builds, all the way from camera to LED panels.",
+            "Usage": "Integration between CGI and live action footage.",
+            "Scope": [
+                "Virtual stage"
+            ],
+            "Creator": [
+                "Virtual production stage team",
+                "Virtual art department",
+                "Virtual production supervisor",
+                "VFX supervisor"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Post production vendors"
+            ]
+        }
+    ],
+    "10.4 Latency Data[e]": [
+        {
+            "Data Collected": [
+                "Latency between cameras, real-time graphics engine, LED panels and engineering"
+            ],
+            "Description": "Measuring latency loops between cameras, tracking, screens / LED walls and real-time graphics engine.",
+            "Usage": "Helps integrate CGI and live action footage.",
+            "Scope": [
+                "Virtual stage"
+            ],
+            "Creator": [
+                "Camera department",
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Audio",
+                "Post production vendors"
+            ]
+        }
+    ],
+    "10.5 Plate vs. Real-Time Rendered Assets": [
+        {
+            "Data Collected": [
+                "Captured plate array assets",
+                "Plate array libraries",
+                "CG generated assets",
+                "Virtual art department generated assets"
+            ],
+            "Description": "Provide captured 2D spherical plates vs. virtual art department built assets for ICVFX.",
+            "Usage": "Used to improve rendering quality, i dentifying when real-time graphics engine backgrounds are used.",
+            "Scope": [
+                "Digital and artistic assets"
+            ],
+            "Creator": [
+                "Virtual production stage team",
+                "Virtual production vendors"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "Virtual production stage team",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "11.1 Virtual Production Log and Continuity Notes": [
+        {
+            "Data Collected": [
+                "Notes on continuity between shots",
+                "Shot management via tools integrated in the real-time graphics engine or media server"
+            ],
+            "Description": "Structured and unstructured notes to maintain and identify any key continuity differences.",
+            "Usage": "Ensures consistency.",
+            "Scope": [
+                "Setup",
+                "Take"
+            ],
+            "Creator": [
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "11.2 Virtual Production Operator Metadata": [
+        {
+            "Data Collected": [
+                "Unreal engine scene versions",
+                "Changes made on set (if changes are made a scene snapshot needs to by output by mission control with a timestamp)"
+            ],
+            "Description": "Real-time graphics engine operator scene specific metadata. .",
+            "Usage": "Better integration between CGI and live action footage.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "11.3 On-Set Real-Time Adjustments": [
+        {
+            "Data Collected": [
+                "Real-time graphics engine operations",
+                "Lighting (DMX)",
+                "Colour grading",
+                "Projector mapping tweaks"
+            ],
+            "Description": "Colour correction and map alterations.",
+            "Usage": "Better integration between CGI and live action footage.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "12.1 Sound Slate & Timecode Alignment": [
+        {
+            "Data Collected": [
+                "Audio sync between virtual production, animation and motion capture"
+            ],
+            "Description": "Sync for the VFX elements.",
+            "Usage": "To sync the audio and CGI",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Sound department",
+                "Camera department",
+                "Virtual production stage team"
+            ],
+            "Consumer": [
+                "Sound department",
+                "Camera department",
+                "Virtual production stage team",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "12.2 Spatial Audio Tracking Metadata": [
+        {
+            "Data Collected": [
+                "Static and dynamic settings from spatial audio system"
+            ],
+            "Description": "Spatial, immersive and Ambisonic audio tracking metadata captures the 3D position, orientation, and movement of the microphone or recording device, providing the positional information needed for accurate spatialization in post-production.",
+            "Usage": "To give dimension to spatial audio. Enables precise 3D placement and movement of sound during spatial audio mixing.",
+            "Scope": [
+                "Take"
+            ],
+            "Creator": [
+                "Spatial audio mixer"
+            ],
+            "Consumer": [
+                "Post production vendors",
+                "Sound mixer"
+            ]
+        }
+    ],
+    "13.1 Physical Props, Costumes": [
+        {
+            "Data Collected": [
+                "Props",
+                "Costumes",
+                "Stunt props"
+            ],
+            "Description": "Items and actions that were either created on-set or used during principal photography.",
+            "Usage": "Guides asset creation, scene layout, and VFX planning. Additional photography.",
+            "Scope": [
+                "Physical asset"
+            ],
+            "Creator": [
+                "Props department",
+                "Costume department",
+                "Stunt department"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "13.2 Mudmaps": [
+        {
+            "Data Collected": [
+                "Diagrams that depict the sets and blocking"
+            ],
+            "Description": "An informal, simplified diagram used in film and television production - especially in art department and production location planning, stunts - to quickly sketch out layouts or spatial relationships.",
+            "Usage": "Aids in CGI planning and actor blocking on set.",
+            "Scope": [
+                "Setup"
+            ],
+            "Creator": [
+                "Stunt department"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "Director",
+                "Actors",
+                "Stunt performers",
+                "Editorial",
+                "Previz vendor"
+            ]
+        }
+    ],
+    "": [
+        {
+            "Data Collected": [
+                "Storyboards (PDFs)",
+                "Previz (movie files)",
+                "Techviz (movie files, PDFs)",
+                "Stuntviz (movie files)"
+            ],
+            "Description": "Visualization that helps plan live action photography.",
+            "Usage": "Guides principal photography, asset creation, action blocking, set, scene layout, camera and VFX planning.",
+            "Scope": [
+                "Sequence"
+            ],
+            "Creator": [
+                "Previz vendors",
+                "Stunt previz team",
+                "Storyboard team"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "VFX post production vendors",
+                "Assistant directory (AD)",
+                "Director",
+                "Producers",
+                "Studio executives",
+                "Studio marketing",
+                "Stunt team",
+                "Special FX",
+                "Art department",
+                "Entire crew pending approvals and confidentiality"
+            ]
+        }
+    ],
+    "13.4 Art Department Assets": [
+        {
+            "Data Collected": [
+                "Set blueprints (PDFs)",
+                "Location blueprints (PDFs)",
+                "Location scout reference photography (still images, movie files)",
+                "Key art",
+                "Sets",
+                "Graphics",
+                "Rigs",
+                "Construction drawings",
+                "Stage plans",
+                "Set list",
+                "Ref Images/movies",
+                "3d Models",
+                "Concept Art",
+                "Maquettes"
+            ],
+            "Description": "Visual and logistical elements from the production art department.",
+            "Usage": "Post production asset creation and additional photography.",
+            "Scope": [
+                "Digital and artistic assets"
+            ],
+            "Creator": [
+                "Art department",
+                "Locations department"
+            ],
+            "Consumer": [
+                "VFX post production vendors",
+                "Marketing",
+                "Studio executives",
+                "Additional photography team",
+                "Editorial",
+                "Previz vendors"
+            ]
+        }
+    ],
+    "14.1 Previz, Techviz, Concept Art": [
+        {
+            "Data Collected": [
+                "Development assets, media and documents from the production"
+            ],
+            "Description": "Used to visually communicate the creative vision between production VFX team and post production vendors.",
+            "Usage": "Alignment between production and vendor teams.",
+            "Scope": [
+                "Entire production"
+            ],
+            "Creator": [
+                "Previz vendors",
+                "Art department",
+                "Production VFX art department"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "14.2 Lens Grid and Reference Specs": [
+        {
+            "Data Collected": [
+                "Lens manufacturer, model and serial number",
+                "Lens calibration data / lens grid capture media",
+                "Dynamic c amera lens metadata (aperture, zoom...)"
+            ],
+            "Description": "Specific data from the lenses used by the camera department.",
+            "Usage": "Used to ensure the vendor has the correct lens information to perform image unwarping, and correctly match the CGI virtual camera to the physical camera and lenses used in live action photography.",
+            "Scope": [
+                "Lens",
+                "Take"
+            ],
+            "Creator": [
+                "VFX production team",
+                "Virtual production stage team",
+                "Data wrangler",
+                "Camera department"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "15.1 Production Tracking Systems": [
+        {
+            "Data Collected": [
+                "Any data, metadata and media for every shot and asset generated during production"
+            ],
+            "Description": "Database and front end application to manage production data.",
+            "Usage": "Data integrity, standardization, shared access between departments and access control",
+            "Scope": [
+                "Entire production"
+            ],
+            "Creator": [
+                "Editorial",
+                "Dailies vendor",
+                "VFX production team"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "15.2 Descriptive File Naming": [
+        {
+            "Data Collected": [
+                "Descriptive and consistent names for the media"
+            ],
+            "Description": "Consistent naming conventions for all data",
+            "Usage": "Data integrity , efficient and unambiguous access to digital assets.",
+            "Scope": [
+                "All production assets"
+            ],
+            "Creator": [
+                "Editorial",
+                "Dailies vendor",
+                "VFX production team",
+                "VFX post production vendor",
+                "All production-side departments",
+                "Virtual production stage team.",
+                "Motion capture team",
+                "Data wrangler",
+                "VFX production team onset vendor",
+                "Digital intermediate (DI) facility."
+            ],
+            "Consumer": [
+                "VFX production team",
+                "Editorial",
+                "Studio executives",
+                "VFX post production vendors",
+                "Previz vendors",
+                "Marketing",
+                "Digital intermediate (DI) facility",
+                "Any entity using this data"
+            ]
+        }
+    ],
+    "15.3 Review Tools": [
+        {
+            "Data Collected": [
+                "Movie files",
+                "Image sequences",
+                "Audio files",
+                "Cut lists / EDLs",
+                "CDL / LUTs",
+                "Notes",
+                "Graphical annotations",
+                "Recipient lists",
+                "Approvals"
+            ],
+            "Description": "Tools used to review work in progress and give feedback.",
+            "Usage": "Collaboration and review of VFX shots between production and vendor teams.",
+            "Scope": [
+                "Entire production"
+            ],
+            "Creator": [
+                "Editorial",
+                "Dailies vendor",
+                "VFX production team",
+                "VFX post production vendors"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "Director",
+                "Actors",
+                "Stunt performers",
+                "Editorial",
+                "Studio executives",
+                "Previz vendor s"
+            ]
+        }
+    ],
+    "15.4 Show Technical Specifications": [
+        {
+            "Data Collected": [
+                "All standards agreed upon upfront"
+            ],
+            "Description": "A single document aggregating all standards for VFX data and metadata interchange between VFX production team and VFX post production vendors.",
+            "Usage": "Establish common standards to avoid ambiguity and ensure consistent interchange with VFX post production vendors.",
+            "Scope": [
+                "Entire production"
+            ],
+            "Creator": [
+                "VFX production team"
+            ],
+            "Consumer": [
+                "VFX post production vendors"
+            ]
+        }
+    ],
+    "16.1 Naming Conventions and Metadata": [
+        {
+            "Data Collected": [
+                "Project or Show ID: a short code identifying the project (\"ABC\", \"SHOW01\")",
+                "Short code or numerical identifier for the sequence or episode (optional for features)",
+                "Short label for type of file or work (\"_comp\", \"_plate\", \"_model\", \"_anim\", ...)",
+                "Short code or numerical identifier for version information (\"_v0001\")",
+                "File extension: standard extension appropriate for the format (\".exr\", \".usd\", \".mov\")",
+                "Date / time format",
+                "Numbering format / number of digitals / zero padding",
+                "Allowed characters",
+                "Metadata to be encoded as filename components / folder hierarchy"
+            ],
+            "Description": "Naming conventions for file based image sequences.",
+            "Usage": "Standard for naming image sequences in an unambiguous way, allowing for smooth interchange between production departments and vendors, avoiding as much as possible need to rename sequences to satisfy specific requirements. Encoding more metadata fields in folder hierarchy / filename components allows image sequences to be interpreted without access to external database or sidecar files, at the cost of complexity and visual clutter.",
+            "Scope": [
+                "All production assets"
+            ],
+            "Creator": [
+                "DI vendor"
+            ],
+            "Consumer": [
+                "VFX post production vendor",
+                "Marketing",
+                "Virtual production"
+            ]
+        }
+    ],
+    "16.2 Plate and Editorial Reference Media": [
+        {
+            "Data Collected": [
+                "Per shot EXR sequences",
+                "Corresponding editorial reference movie files",
+                "Timing reference files (EDL, cutlist, AAF, OTIO, ALE)",
+                "Image extraction, retiming, scaling and reposition metadata",
+                "Metadata burn ins",
+                "Color correction metadata (CDLs)",
+                "Reference audio files"
+            ],
+            "Description": "EXR file sequences for shots requiring VFX, referred to as VFX pulls, and corresponding editorial media and metadata.",
+            "Usage": "Background plates and live action photography used by VFX vendors for creation of VFX. VFX editorial team provides EDL information to Pull vendor. Pull vendor transcodes Original Camera Negative (OCN) data to EXR sequence with correct colourspace, image extraction and scaling, metadata and naming conventions. Data delivered from Pull vendor to VFX production team, which then delivers to VFX post production vendor. At the start of a shot, a full package of test data is sent through the delivery pipeline to confirm and to end color and imaging transparency.",
+            "Scope": [
+                "Sequence",
+                "Shot"
+            ],
+            "Creator": [
+                "Pull vendor",
+                "VFX editorial",
+                "VFX production team"
+            ],
+            "Consumer": [
+                "VFX post production vendor",
+                "Virtual production"
+            ]
+        }
+    ],
+    "16.3 VFX Shot Delivery": [
+        {
+            "Data Collected": [
+                "Per shot EXR sequences",
+                "Corresponding editorial and supervisor reference movie files",
+                "Metadata burn ins",
+                "Slate frames",
+                "Original metadata files",
+                "In context cut sequence reference"
+            ],
+            "Description": "EXR file sequence and ancillary data with Work In Progress or Final VFX shots.",
+            "Usage": "Intermediate or final shots delivered from VFX vendors back to VFX production team for notes or final approval.",
+            "Scope": [
+                "Sequence",
+                "Shot"
+            ],
+            "Creator": [
+                "VFX post production vendor"
+            ],
+            "Consumer": [
+                "VFX production team",
+                "VFX editorial",
+                "Production editorial"
+            ]
+        }
+    ]
+}

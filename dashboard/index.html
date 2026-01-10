@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On-Set Data Specs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="doc_styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>VES On-Set VFX Data Collection and Usage Guide</h1>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>On-Set Specs</h1>
+            </div>
+
+            <div id="filter-container">
+                <div class="filter-section">
+                    <h3>Scope</h3>
+                    <div id="scope-filters" class="filter-group">
+                        <!-- Checkboxes injected by JS -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Creators</h3>
+                    <div id="creator-filters" class="filter-group">
+                        <!-- Checkboxes injected by JS -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Consumers</h3>
+                    <div id="consumer-filters" class="filter-group">
+                        <!-- Checkboxes injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="Introduction">Introduction</button>
+                <button class="tab-btn" data-tab="Scope Definitions">Scope Definitions</button>
+                <button class="tab-btn" data-tab="Specs">Specs</button>
+                <button class="tab-btn" data-tab="Directory Structure">Directory Structure</button>
+                <button class="tab-btn" data-tab="Reference Docs">Reference Docs</button>
+            </nav>
+
+            <header class="top-bar" id="specs-header">
+                <input type="text" id="search-input" placeholder="Search specs...">
+                <div class="stats" id="stats-display">Showing all items</div>
+            </header>
+
+            <div id="content-grid" class="grid-container">
+                <!-- Cards injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../data/data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
