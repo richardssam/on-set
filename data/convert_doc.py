@@ -90,7 +90,17 @@ def parse_google_doc_html(html_path, output_css_path=None):
     # Note: re.compile matches tags
     elements = soup.find_all(re.compile(r'^h[1-2]|^table|^p|^ul|^ol'))
     
+    # Helper to remove comments before text extraction
+    def remove_comments(tag):
+        for a_tag in tag.find_all('a', href=True):
+            if a_tag['href'].startswith('#cmnt'):
+                a_tag.decompose()
+
     for el in elements:
+        # Pre-clean comments from the element before any processing
+        # This ensures titles, tables, and paragraphs all get cleaned.
+        remove_comments(el)
+        
         text = clean_text(el.get_text(separator=' ', strip=True))
         
         # Check for Directory Structure (ASCII Tree)
@@ -160,9 +170,15 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  for span in el.find_all('span'):
                     span.unwrap()
 
-                 # Clean up Google Redirects
+                 # Clean up Google Redirects and Comment Links
                  for a_tag in el.find_all('a', href=True):
                      href = a_tag['href']
+                     
+                     # Remove Google Doc comment links (e.g. #cmnt1) and their content (e.g. [a])
+                     if href.startswith('#cmnt'):
+                         a_tag.decompose()
+                         continue
+
                      if href.startswith('https://www.google.com/url'):
                          # Extract 'q' parameter
                          match = re.search(r'[?&]q=([^&]+)', href)
@@ -227,12 +243,22 @@ def parse_google_doc_html(html_path, output_css_path=None):
                     target_list.append({"html": f"<{el.name}>{content}</{el.name}>"})
 
         elif el.name == 'table':
+            # Helper to remove comments before text extraction
+            def remove_comments(tag):
+                for a_tag in tag.find_all('a', href=True):
+                    if a_tag['href'].startswith('#cmnt'):
+                        a_tag.decompose()
+
             # Parse table
             table_data = {}
             rows = el.find_all('tr')
             for row in rows:
                 cols = row.find_all(['td', 'th'])
                 if len(cols) >= 2:
+                    # Clean comments from both columns
+                    remove_comments(cols[0])
+                    remove_comments(cols[1])
+
                     key = clean_text(cols[0].get_text(separator=' ', strip=True))
                     
                     ul = cols[1].find('ul')
