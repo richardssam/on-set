@@ -34,3 +34,8 @@ This will automatically download the HTML export and update `data.js`.
 
 ## Running the Dashboard
 Simply open `dashboard/index.html` in your web browser. No server is required.
+
+## Authors
+
+Web page and import script by Sam Richards.
+On-set document by Sheena Duggal with contributions from Sam Richards, Jim Geduldick, and Jake Morrison, and technical support from Jean-Francois Panisset
