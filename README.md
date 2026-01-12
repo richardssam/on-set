@@ -1,5 +1,6 @@
-# on-set
-On-set VFX Data Collection and usage web site.
+# VES On-set VFX Data Collection and usage web site.
+
+On-set VFX Data Collection and usage web site. This processes the google doc https://docs.google.com/document/d/13TsptYa5uNO52btOw1nat1cLSBG88t27W3BXHBZPvoc/edit?tab=t.0#heading=h.h7s96q27odn9 into a format that is easily filterable, since the document is huge and can be overwhelming.
 
 ## Setup
 1.  Ensure you have Python 3 installed.
