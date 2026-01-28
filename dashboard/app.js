@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             creators: new Set(),
             consumers: new Set(),
             scope: new Set(),
+            vfxTypes: new Set(),
             search: ''
         }
     };
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         creatorFilters: document.getElementById('creator-filters'),
         consumerFilters: document.getElementById('consumer-filters'),
         scopeFilters: document.getElementById('scope-filters'),
+        vfxTypeFilters: document.getElementById('vfx-type-filters'),
         searchInput: document.getElementById('search-input'),
         stats: document.getElementById('stats-display'),
         tabs: document.querySelectorAll('.tab-btn'),
@@ -101,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.filters.scope.size > 0) {
             params.set('scope', Array.from(state.filters.scope).join(','));
         }
+        if (state.filters.vfxTypes.size > 0) {
+            params.set('vfxTypes', Array.from(state.filters.vfxTypes).join(','));
+        }
 
         const newUrl = `${window.location.pathname}?${params.toString()}`;
         window.history.replaceState({}, '', newUrl);
@@ -127,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const scope = params.get('scope');
         if (scope) scope.split(',').forEach(s => state.filters.scope.add(s));
+
+        const vfxTypes = params.get('vfxTypes');
+        if (vfxTypes) vfxTypes.split(',').forEach(s => state.filters.vfxTypes.add(s));
     }
 
     // Initialize
@@ -344,12 +352,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     let rawScope = Array.isArray(item.Scope) ? item.Scope : (item.Scope ? [item.Scope] : []);
                     const scope = rawScope.map(s => normalizeScope(s)).filter(s => s.length > 0);
 
+                    const vfxTypes = Array.isArray(item.VFXTypes) ? item.VFXTypes : (item.VFXTypes ? [item.VFXTypes] : []);
+
                     specsFlatList.push({
                         h1Title: h1.title,
                         h2Title: h2.title,
                         creators: creators,
                         consumers: consumers,
                         scope: scope,
+                        vfxTypes: vfxTypes,
                         original: item
                     });
                 });
@@ -361,11 +372,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const allCreators = new Set();
         const allConsumers = new Set();
         const allScope = new Set();
+        const allVfxTypes = new Set();
 
         specsFlatList.forEach(item => {
             item.creators.forEach(c => allCreators.add(c));
             item.consumers.forEach(c => allConsumers.add(c));
             item.scope.forEach(c => allScope.add(c));
+            item.vfxTypes.forEach(c => allVfxTypes.add(c));
         });
 
         const renderGroup = (container, items, type) => {
@@ -421,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGroup(dom.creatorFilters, allCreators, 'creators');
         renderGroup(dom.consumerFilters, allConsumers, 'consumers');
         renderGroup(dom.scopeFilters, allScope, 'scope');
+        renderGroup(dom.vfxTypeFilters, allVfxTypes, 'vfxTypes');
     }
 
     dom.searchInput.addEventListener('input', (e) => {
@@ -446,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (state.filters.creators.size > 0 && !item.creators.some(c => state.filters.creators.has(c))) return false;
             if (state.filters.consumers.size > 0 && !item.consumers.some(c => state.filters.consumers.has(c))) return false;
             if (state.filters.scope.size > 0 && !item.scope.some(c => state.filters.scope.has(c))) return false;
+            if (state.filters.vfxTypes.size > 0 && !item.vfxTypes.some(c => state.filters.vfxTypes.has(c))) return false;
             return true;
         });
 
@@ -466,18 +481,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             for (const [h2Title, items] of Object.entries(h2Group)) {
                 items.forEach(item => {
-                    renderCard(item.original, dom.grid, item.creators, item.consumers, item.scope, h2Title);
+                    renderCard(item.original, dom.grid, item.creators, item.consumers, item.scope, item.vfxTypes, h2Title);
                 });
             }
         }
     }
 
-    function renderCard(itemData, container, creators, consumers, scope, sectionTitle) {
+    function renderCard(itemData, container, creators, consumers, scope, vfxTypes, sectionTitle) {
         const card = document.createElement('div');
         card.className = 'card';
         const displayTitle = sectionTitle || 'Item';
         const creatorTags = creators.map(c => `<span class="tag">${c}</span>`).join('');
         const consumerTags = consumers.map(c => `<span class="tag">${c}</span>`).join('');
+        const vfxTypeTags = vfxTypes ? vfxTypes.map(c => `<span class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">${c}</span>`).join('') : ''; // Different color (Emerald-ish)
         const scopeTags = scope.map(s => {
             const desc = scopeDescriptions.get(s.toLowerCase()) || '';
             const tooltipAttr = desc ? ` data-tooltip="${desc.replace(/"/g, '&quot;')}"` : '';
@@ -485,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         let bodyContent = '';
-        const skipKeys = ['Creator', 'Consumer', 'Description', 'Scope'];
+        const skipKeys = ['Creator', 'Consumer', 'Description', 'Scope', 'VFXTypes'];
 
         if (itemData.Description) {
             bodyContent += `<div class="field-item" style="color: var(--text-secondary); margin-bottom: 1rem;"><p>${itemData.Description}</p></div>`;
@@ -504,6 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-body">
             ${bodyContent}
             <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                ${vfxTypes && vfxTypes.length ? `<div class="field-group"><span class="field-label">VFX Types</span><div class="tag-container">${vfxTypeTags}</div></div>` : ''}
                 ${scope.length ? `<div class="field-group"><span class="field-label">Scope</span><div class="tag-container">${scopeTags}</div></div>` : ''}
                 ${creators.length ? `<div class="field-group"><span class="field-label">Creators</span><div class="tag-container">${creatorTags}</div></div>` : ''}
                 ${consumers.length ? `<div class="field-group"><span class="field-label">Consumers</span><div class="tag-container">${consumerTags}</div></div>` : ''}

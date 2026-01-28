@@ -3,6 +3,38 @@ from bs4 import BeautifulSoup
 import re
 import os
 import urllib.parse
+import csv
+
+def load_vfx_type_mapping(csv_path):
+    mapping = {}
+    if not os.path.exists(csv_path):
+        print(f"Warning: CSV path {csv_path} does not exist.")
+        return mapping
+        
+    try:
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            headers = next(reader)
+            # Headers: Number, Title, [Types...]
+            type_headers = headers[2:]
+            
+            for row in reader:
+                if not row: continue
+                number = row[0].strip()
+                if not number: continue
+                
+                types = []
+                # Check each type column
+                for i, cell in enumerate(row[2:]):
+                    if cell.strip(): # If cell is not empty, it belongs to this type
+                        types.append(type_headers[i].strip())
+                
+                if types:
+                    mapping[number] = types
+    except Exception as e:
+        print(f"Error reading CSV: {e}")
+        
+    return mapping
 
 def clean_text(text):
     return re.sub(r'\s+', ' ', text).strip()
@@ -287,6 +319,48 @@ def parse_google_doc_html(html_path, output_css_path=None):
                         if not current_h1_obj["subsections"]:
                              current_h1_obj["subsections"].append({"title": "General", "items": []})
                         current_h1_obj["subsections"][-1]["items"].append(table_data)
+
+    # Post-process: Inject VFX Types from CSV mapping
+    # We assume the CSV path is predictable or passed in globally, but for now let's look for it in the same dir as input
+    # actually getting it from args would be cleaner, but let's assume standard location for now:
+    # "data/on-set-title-type-mapping - titles.csv"
+    
+    # Try to find the CSV file relative to the input file or current working dir
+    # This is a bit hacky relying on hardcoded name but fits the immediate request
+    csv_name = "on-set-title-type-mapping - titles.csv"
+    csv_path = os.path.join(os.path.dirname(html_path), csv_name)
+    
+    vfx_mapping = load_vfx_type_mapping(csv_path)
+    
+    if vfx_mapping:
+        print(f"Loaded {len(vfx_mapping)} VFX type mappings.")
+        
+        # Helper to find number in title
+        def extract_number(title):
+            # Matches "1.", "1.1", "10.1" etc at start
+            match = re.match(r'^(\d+(\.\d+)*)', title)
+            return match.group(1) if match else None
+
+        for h1 in output["Data Sets"]:
+            h1_number = extract_number(h1["title"])
+            
+            for h2 in h1["subsections"]:
+                h2_number = extract_number(h2["title"])
+                
+                # Determine which number to use for lookup. 
+                # H2 is more specific, but maybe we want to fall back to H1?
+                # The CSV seems to have specific rows for 1.1, 1.2 etc.
+                # Let's try matching H2 first.
+                
+                target_types = []
+                if h2_number and h2_number in vfx_mapping:
+                    target_types = vfx_mapping[h2_number]
+                elif h1_number and h1_number in vfx_mapping:
+                     target_types = vfx_mapping[h1_number]
+                
+                if target_types:
+                    for item in h2["items"]:
+                        item["VFXTypes"] = target_types
 
     # Post-process Merge HTML blocks
     for section in ["Introduction", "Reference Docs"]: # Exclude Directory Structure from HTML merge as it is now empty/placeholder

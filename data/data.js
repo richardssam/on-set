@@ -73,6 +73,12 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -112,6 +118,12 @@ const ON_SET_DATA = {
                                 "Studio Marketing",
                                 "VFX Editorial",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -144,6 +156,12 @@ const ON_SET_DATA = {
                                 "Dailies And DI Vendor",
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -177,6 +195,12 @@ const ON_SET_DATA = {
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Editorial",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -207,6 +231,11 @@ const ON_SET_DATA = {
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Editorial",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -234,6 +263,9 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX"
                             ]
                         }
                     ]
@@ -265,6 +297,9 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Behind-the-scenes Content",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -294,6 +329,11 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Behind The Scenes Content",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Character VFX",
+                                "Complex VFX",
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -325,6 +365,11 @@ const ON_SET_DATA = {
                                 "Studio Marketing For Game Or Commercial Creation",
                                 "Stunt Team During Principal Photography",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Character VFX",
+                                "Complex VFX",
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -362,6 +407,12 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Script Supervisor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -523,6 +574,10 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -550,6 +605,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -576,6 +635,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -605,6 +668,10 @@ const ON_SET_DATA = {
                                 "Post Production",
                                 "VFX Post Production Vendor",
                                 "Virtual Production"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -630,6 +697,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -654,6 +725,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -689,6 +764,10 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor",
                                 "VFX Production Team In Additional Photography",
                                 "Vendor Creating LED Volume Content"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -716,6 +795,10 @@ const ON_SET_DATA = {
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "Stunt Team",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -746,6 +829,10 @@ const ON_SET_DATA = {
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "Stunt Team",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -775,6 +862,10 @@ const ON_SET_DATA = {
                                 "Stunt Previz Team",
                                 "VFX Post Production Vendor",
                                 "Virtual Production / Icvfx"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -802,6 +893,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Character VFX",
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -829,6 +924,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Studio Marketing For Behind The Scenes Content",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -858,6 +957,9 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -891,6 +993,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -929,6 +1035,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -962,6 +1072,10 @@ const ON_SET_DATA = {
                                 "DI Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -989,6 +1103,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1030,6 +1148,10 @@ const ON_SET_DATA = {
                                 "Studio",
                                 "Stunt Team",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1060,6 +1182,11 @@ const ON_SET_DATA = {
                                 "Studio Executives When Pitching Concepts",
                                 "Studio Marketing For Behind The Scenes Content",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1095,6 +1222,9 @@ const ON_SET_DATA = {
                                 "Game Studios",
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -1122,6 +1252,9 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -1155,6 +1288,9 @@ const ON_SET_DATA = {
                                 "Game Studios",
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -1188,6 +1324,9 @@ const ON_SET_DATA = {
                                 "Game Studios",
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -1214,6 +1353,9 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Game Studios",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture"
                             ]
                         }
                     ]
@@ -1252,6 +1394,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Previz Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1287,6 +1433,10 @@ const ON_SET_DATA = {
                                 "Camera",
                                 "Post Production Vendor",
                                 "Virtual Production"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1317,6 +1467,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Motion Capture Vendor",
                                 "VFX Post Production Vendor",
+                                "Virtual Production"
+                            ],
+                            "VFXTypes": [
+                                "Motion Capture",
                                 "Virtual Production"
                             ]
                         }
@@ -1354,6 +1508,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor",
                                 "Virtual Art Department",
                                 "Virtual Production Stage Team"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1382,6 +1539,9 @@ const ON_SET_DATA = {
                                 "Postviz Vendor (camera Path Smoothing)",
                                 "VFX Post Production Vendor",
                                 "Virtual Production Stage Team"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1413,6 +1573,9 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Post Production Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1441,6 +1604,9 @@ const ON_SET_DATA = {
                                 "Audio",
                                 "Post Production Vendor",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1472,6 +1638,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor",
                                 "VFX Production Team",
                                 "Virtual Production Stage Team"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1504,6 +1673,9 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1530,6 +1702,9 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1558,6 +1733,9 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1593,6 +1771,9 @@ const ON_SET_DATA = {
                                 "Sound Department",
                                 "VFX Post Production Vendor",
                                 "Virtual Production Stage Team"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1619,6 +1800,9 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "Post Production Vendor",
                                 "Sound Mixer"
+                            ],
+                            "VFXTypes": [
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1653,6 +1837,10 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1683,6 +1871,10 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Stunt Performer",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1723,6 +1915,10 @@ const ON_SET_DATA = {
                                 "Stunt Team",
                                 "VFX Post Production Vendor",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1767,6 +1963,12 @@ const ON_SET_DATA = {
                                 "Previz Vendor",
                                 "Studio Executives",
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1799,6 +2001,12 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1830,6 +2038,10 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1863,6 +2075,10 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "VFX Post Production Vendor",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1904,6 +2120,10 @@ const ON_SET_DATA = {
                                 "Studio Executives",
                                 "VFX Post Production Vendor",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1946,6 +2166,10 @@ const ON_SET_DATA = {
                                 "Studio Executives",
                                 "Stunt Performer",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -1967,6 +2191,12 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "VFX Post Production Vendor"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -2003,6 +2233,12 @@ const ON_SET_DATA = {
                                 "Marketing",
                                 "VFX Post Production Vendor",
                                 "Virtual Production"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -2034,6 +2270,12 @@ const ON_SET_DATA = {
                             "Consumer": [
                                 "VFX Post Production Vendor",
                                 "Virtual Production"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -2063,6 +2305,12 @@ const ON_SET_DATA = {
                                 "Production Editorial",
                                 "VFX Editorial",
                                 "VFX Production Team"
+                            ],
+                            "VFXTypes": [
+                                "Basic VFX",
+                                "Character VFX",
+                                "Complex VFX",
+                                "Virtual Production"
                             ]
                         }
                     ]

@@ -1,0 +1,83 @@
+Number,Title,Basic VFX,Character VFX,Complex VFX,Motion Capture,Virtual Production
+0,Common Parameters,,,,,
+1,Camera & Lens Data,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+1.1,Manual Camera Data Collection,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+1.2,Camera Type & Model,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+1.3,Per take Sensor Metadata,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+1.4,Per Camera Lens Specifications,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+1.5,Lens Encoder Tracking Data,,Character VFX,Complex VFX,,Virtual Production
+1.6,Camera Depth Information,,,Complex VFX,,
+2,Witness Cameras & Reference Video,,Character VFX,Complex VFX,Motion Capture,
+2.1,Multiple Witness Cameras,,,,Motion Capture,
+2.2,Overhead & Wide-Angle BTS Coverage,,,,,
+2.3,Real-World Depth Information,,,,,
+3,Production Reports & Metadata,,,,,
+3.1,Camera Reports,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+3.2,Clips Report,,,,,
+3.3,Shooting Day Report,,,,,
+3.4,Sound Report,,,,,
+3.5,Schedule and One-Liner,,,,,
+3.6,Script Supervisor Notes,,,,,
+4,Colour & Lighting Reference,,,Complex VFX,,Virtual Production
+4.1,Colour Charts,,,Complex VFX,,Virtual Production
+4.2,HDRIs,,,Complex VFX,,Virtual Production
+4.3,Lighting Reference Objects/Props,,,Complex VFX,,Virtual Production
+4.4,DMX/Lighting Control Metadata,,,Complex VFX,,Virtual Production
+4.5,Light Sources & Colour Temperature,,,Complex VFX,,Virtual Production
+4.6,Shadow Behavior & Falloff,,,Complex VFX,,Virtual Production
+5,"Set, Prop, and Actor Scans",,,Complex VFX,,Virtual Production
+5.1,LIDAR Scans / Texture Photography,,,Complex VFX,,Virtual Production
+5.2,Prop Scans,,,Complex VFX,,Virtual Production
+5.3,Photogrammetry,,,Complex VFX,,Virtual Production
+5.4,"NERFs, Gaussian Splats",,,Complex VFX,,Virtual Production
+5.5,"Face Scans, Body Scans",,Character VFX,,Motion Capture,
+5.6,Set Reference Photography,,,Complex VFX,,Virtual Production
+5.7,"Costume, Face Marker, and T-Pose Reference",,,,Motion Capture,
+5.8,"Reference of Vehicles, Props, Production Locations",,,Complex VFX,,Virtual Production
+6,Camera Rig & Technical Specs,,,Complex VFX,,Virtual Production
+6.1,Camera Tech Specs,,,Complex VFX,,Virtual Production
+6.2,DIT Specs,,,Complex VFX,,Virtual Production
+6.3,Lens Specification,,,Complex VFX,,Virtual Production
+7,Vendor & Pre-Production Data from VFX Vendor to Production.,,,Complex VFX,,Virtual Production
+7.1,Previz/Techviz,,,Complex VFX,,Virtual Production
+7.2,"Concept Art, Lookdev, Character Designs, R&D, Storyboards",,Character VFX,Complex VFX,,Virtual Production
+8,Mocap Data,,,,Motion Capture,
+8.1,Mocap Suit Tracking,,,,Motion Capture,
+8.2,Performance Capture Facial Tracking,,,,Motion Capture,
+8.3,Hand/Finger Tracking,,,,Motion Capture,
+8.4,Raw Animation Data & Retargeting Settings,,,,Motion Capture,
+8.5,Motion Capture Volume Data,,,,Motion Capture,
+9,Camera Tracking & Sync,,,,Motion Capture,Virtual Production
+9.1,Camera Tracking Data,,,,Motion Capture,Virtual Production
+9.2,Timecode Sync & Genlock,,,,Motion Capture,Virtual Production
+9.3,IMU Data,,,,Motion Capture,Virtual Production
+10,LED Volume & Environment Data,,,,,Virtual Production
+10.1,Volume Layout & Dimensions,,,,,Virtual Production
+10.2,Display Frustum Calibration,,,,,Virtual Production
+10.3,Colour Profile & Brightness Settings,,,,,Virtual Production
+10.4,Latency Data,,,,,Virtual Production
+10.5,Plate vs. Real-Time Rendered Assets,,,,,Virtual Production
+11,Scene Metadata & Notes,,,,,Virtual Production
+11.1,Virtual Production Log and Continuity Notes,,,,,Virtual Production
+11.2,Virtual Production Operator Metadata,,,,,Virtual Production
+11.3,On-Set Real-Time Adjustments,,,,,Virtual Production
+12,Audio & Sync Data,,,,,Virtual Production
+12.1,Sound Slate & Timecode Alignment,,,,,Virtual Production
+12.2,Spatial Audio Tracking Metadata,,,,,Virtual Production
+13,Data from Other Production Departments,,,Complex VFX,,Virtual Production
+13.1,"Physical Props, Costumes",,,Complex VFX,,Virtual Production
+13.2,Mudmaps,,,Complex VFX,,Virtual Production
+13.3,"Storyboards, Previz, Techviz, Stuntviz",,,Complex VFX,,Virtual Production
+13.4,Art Department Assets,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+14,Data Shared with VFX Vendors During Principal Photography,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+14.1,"Previz, Techviz, Concept Art",Basic VFX,Character VFX,Complex VFX,,Virtual Production
+14.2,Lens Grid and Reference Specs,,,Complex VFX,,Virtual Production
+15,"Data Management, Tracking, and Review",,,Complex VFX,,Virtual Production
+15.1,Production Tracking Systems,,,Complex VFX,,Virtual Production
+15.2,Descriptive File Naming,,,Complex VFX,,Virtual Production
+15.3,Review Tools,,,Complex VFX,,Virtual Production
+15.4,Show Technical Specifications,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+16,Plate Deliverables,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+16.1,Naming Conventions and Metadata,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+16.2,Plate and Editorial Reference Media,Basic VFX,Character VFX,Complex VFX,,Virtual Production
+16.3,VFX Shot Delivery,Basic VFX,Character VFX,Complex VFX,,Virtual Production

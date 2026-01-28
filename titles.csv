@@ -1,0 +1,83 @@
+Number,Title
+0,Common Parameters
+1,Camera & Lens Data
+1.1,Manual Camera Data Collection
+1.2,Camera Type & Model
+1.3,Per take Sensor Metadata
+1.4,Per Camera Lens Specifications
+1.5,Lens Encoder Tracking Data
+1.6,Camera Depth Information
+2,Witness Cameras & Reference Video
+2.1,Multiple Witness Cameras
+2.2,Overhead & Wide-Angle BTS Coverage
+2.3,Real-World Depth Information
+3,Production Reports & Metadata
+3.1,Camera Reports
+3.2,Clips Report
+3.3,Shooting Day Report
+3.4,Sound Report
+3.5,Schedule and One-Liner
+3.6,Script Supervisor Notes
+4,Colour & Lighting Reference
+4.1,Colour Charts
+4.2,HDRIs
+4.3,Lighting Reference Objects/Props
+4.4,DMX/Lighting Control Metadata
+4.5,Light Sources & Colour Temperature
+4.6,Shadow Behavior & Falloff
+5,"Set, Prop, and Actor Scans"
+5.1,LIDAR Scans / Texture Photography
+5.2,Prop Scans
+5.3,Photogrammetry
+5.4,"NERFs, Gaussian Splats"
+5.5,"Face Scans, Body Scans"
+5.6,Set Reference Photography
+5.7,"Costume, Face Marker, and T-Pose Reference"
+5.8,"Reference of Vehicles, Props, Production Locations"
+6,Camera Rig & Technical Specs
+6.1,Camera Tech Specs
+6.2,DIT Specs
+6.3,Lens Specification
+7,Vendor & Pre-Production Data from VFX Vendor to Production.
+7.1,Previz/Techviz
+7.2,"Concept Art, Lookdev, Character Designs, R&D, Storyboards"
+8,Mocap Data
+8.1,Mocap Suit Tracking
+8.2,Performance Capture Facial Tracking
+8.3,Hand/Finger Tracking
+8.4,Raw Animation Data & Retargeting Settings
+8.5,Motion Capture Volume Data
+9,Camera Tracking & Sync
+9.1,Camera Tracking Data
+9.2,Timecode Sync & Genlock
+9.3,IMU Data
+10,LED Volume & Environment Data
+10.1,Volume Layout & Dimensions
+10.2,Display Frustum Calibration
+10.3,Colour Profile & Brightness Settings
+10.4,Latency Data
+10.5,Plate vs. Real-Time Rendered Assets
+11,Scene Metadata & Notes
+11.1,Virtual Production Log and Continuity Notes
+11.2,Virtual Production Operator Metadata
+11.3,On-Set Real-Time Adjustments
+12,Audio & Sync Data
+12.1,Sound Slate & Timecode Alignment
+12.2,Spatial Audio Tracking Metadata
+13,Data from Other Production Departments
+13.1,"Physical Props, Costumes"
+13.2,Mudmaps
+13.3,"Storyboards, Previz, Techviz, Stuntviz"
+13.4,Art Department Assets
+14,Data Shared with VFX Vendors During Principal Photography
+14.1,"Previz, Techviz, Concept Art"
+14.2,Lens Grid and Reference Specs
+15,"Data Management, Tracking, and Review"
+15.1,Production Tracking Systems
+15.2,Descriptive File Naming
+15.3,Review Tools
+15.4,Show Technical Specifications
+16,Plate Deliverables
+16.1,Naming Conventions and Metadata
+16.2,Plate and Editorial Reference Media
+16.3,VFX Shot Delivery
