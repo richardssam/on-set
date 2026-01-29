@@ -75,10 +75,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -120,10 +124,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -158,10 +166,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -197,10 +209,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -233,9 +249,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -265,7 +286,10 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Complex VFX"
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -299,7 +323,10 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Motion Capture"
+                                "Basic 3D VFX",
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -331,9 +358,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
                                 "Character VFX",
                                 "Complex VFX",
-                                "Motion Capture"
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -367,9 +396,8 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Character VFX",
-                                "Complex VFX",
-                                "Motion Capture"
+                                "Basic 3D VFX",
+                                "Complex VFX"
                             ]
                         }
                     ]
@@ -409,10 +437,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -439,6 +471,11 @@ const ON_SET_DATA = {
                                 "Script Supervisor",
                                 "VFX Data Wrangler",
                                 "VFX Dpm"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -466,6 +503,11 @@ const ON_SET_DATA = {
                                 "UPM",
                                 "VFX Editorial",
                                 "VFX Producer"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -490,6 +532,12 @@ const ON_SET_DATA = {
                                 "Motion Capture",
                                 "VFX Department",
                                 "Virtual Production Department"
+                            ],
+                            "VFXTypes": [
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -519,6 +567,15 @@ const ON_SET_DATA = {
                                 "Post Production",
                                 "Producers",
                                 "Studio"
+                            ],
+                            "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -548,6 +605,14 @@ const ON_SET_DATA = {
                                 "Hair And Makeup",
                                 "Sound Department",
                                 "VFX Department"
+                            ],
+                            "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production"
                             ]
                         }
                     ]
@@ -576,8 +641,12 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -607,8 +676,12 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -637,8 +710,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -670,8 +746,11 @@ const ON_SET_DATA = {
                                 "Virtual Production"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -699,8 +778,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -727,8 +809,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -766,8 +851,11 @@ const ON_SET_DATA = {
                                 "Vendor Creating LED Volume Content"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -797,8 +885,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -831,8 +922,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -864,8 +958,11 @@ const ON_SET_DATA = {
                                 "Virtual Production / Icvfx"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -896,6 +993,7 @@ const ON_SET_DATA = {
                             ],
                             "VFXTypes": [
                                 "Character VFX",
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -926,8 +1024,12 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -959,6 +1061,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -995,8 +1098,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1038,7 +1144,9 @@ const ON_SET_DATA = {
                             ],
                             "VFXTypes": [
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1075,7 +1183,8 @@ const ON_SET_DATA = {
                             ],
                             "VFXTypes": [
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1105,8 +1214,13 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1150,8 +1264,13 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1184,9 +1303,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1224,6 +1348,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -1254,6 +1379,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -1290,6 +1416,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -1326,6 +1453,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -1355,6 +1483,7 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture"
                             ]
                         }
@@ -1396,8 +1525,13 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
+                                "Complex VFX",
                                 "Motion Capture",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1435,8 +1569,10 @@ const ON_SET_DATA = {
                                 "Virtual Production"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1470,8 +1606,10 @@ const ON_SET_DATA = {
                                 "Virtual Production"
                             ],
                             "VFXTypes": [
+                                "Complex VFX",
                                 "Motion Capture",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1510,7 +1648,9 @@ const ON_SET_DATA = {
                                 "Virtual Production Stage Team"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1541,7 +1681,8 @@ const ON_SET_DATA = {
                                 "Virtual Production Stage Team"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1575,7 +1716,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1606,7 +1749,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1640,7 +1785,9 @@ const ON_SET_DATA = {
                                 "Virtual Production Stage Team"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1675,7 +1822,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1704,7 +1853,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1735,7 +1886,9 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1773,7 +1926,10 @@ const ON_SET_DATA = {
                                 "Virtual Production Stage Team"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1802,7 +1958,9 @@ const ON_SET_DATA = {
                                 "Sound Mixer"
                             ],
                             "VFXTypes": [
-                                "Virtual Production"
+                                "Complex VFX",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1839,8 +1997,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1873,8 +2034,11 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1917,8 +2081,12 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -1965,10 +2133,13 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2003,10 +2174,13 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2040,8 +2214,11 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2077,8 +2254,11 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2122,8 +2302,13 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2168,8 +2353,13 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2193,10 +2383,14 @@ const ON_SET_DATA = {
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2235,10 +2429,14 @@ const ON_SET_DATA = {
                                 "Virtual Production"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2272,10 +2470,14 @@ const ON_SET_DATA = {
                                 "Virtual Production"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
@@ -2307,10 +2509,14 @@ const ON_SET_DATA = {
                                 "VFX Production Team"
                             ],
                             "VFXTypes": [
-                                "Basic VFX",
+                                "Basic 2D VFX",
+                                "Basic 3D VFX",
                                 "Character VFX",
+                                "Digital Matte Painting",
                                 "Complex VFX",
-                                "Virtual Production"
+                                "Motion Capture",
+                                "Virtual Production",
+                                "Real time"
                             ]
                         }
                     ]
