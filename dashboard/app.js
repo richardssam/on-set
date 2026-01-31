@@ -44,8 +44,24 @@ document.addEventListener('DOMContentLoaded', () => {
         stats: document.getElementById('stats-display'),
         tabs: document.querySelectorAll('.tab-btn'),
         printBtn: document.getElementById('print-btn'),
-        tooltip: document.getElementById('tooltip')
+        tooltip: document.getElementById('tooltip'),
+        resetBtn: document.getElementById('reset-filters-btn')
     };
+
+    // Reset Filters Logic
+    if (dom.resetBtn) {
+        dom.resetBtn.addEventListener('click', () => {
+            state.filters.creators.clear();
+            state.filters.consumers.clear();
+            state.filters.scope.clear();
+            state.filters.vfxTypes.clear();
+            // Optional: state.filters.search = ''; dom.searchInput.value = '';
+
+            updateUrlParams();
+            renderFilters(); // Re-renders checkboxes to unchecked state
+            renderDataSetsGrid(); // Shows all items
+        });
+    }
 
     // Tooltip Logic
     document.addEventListener('mouseover', (e) => {
