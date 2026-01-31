@@ -670,7 +670,7 @@ const ON_SET_DATA = {
                             ],
                             "Creator": [
                                 "Data Wrangler",
-                                "VFX Onset Vendor"
+                                "VFX On-set Vendor"
                             ],
                             "Consumer": [
                                 "Studio Marketing For Commercial Or Game Creation",
@@ -702,7 +702,7 @@ const ON_SET_DATA = {
                             "Creator": [
                                 "Art Department",
                                 "Model Or Prosthetic Companies",
-                                "Prop Department",
+                                "Props Department",
                                 "SFX Vendor",
                                 "Stunt Department"
                             ],
@@ -846,7 +846,7 @@ const ON_SET_DATA = {
                                 "Art Department",
                                 "Previz",
                                 "Studio Marketing For Commercial Or Game Creation",
-                                "Stunt Team",
+                                "Stunt Department",
                                 "VFX Post Production Vendor",
                                 "VFX Production Team In Additional Photography",
                                 "Vendor Creating LED Volume Content"
@@ -874,7 +874,7 @@ const ON_SET_DATA = {
                                 "Prop"
                             ],
                             "Creator": [
-                                "Prop Department",
+                                "Props Department",
                                 "VFX On-set Capture Vendor"
                             ],
                             "Consumer": [
@@ -882,7 +882,7 @@ const ON_SET_DATA = {
                                 "Art Department",
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
-                                "Stunt Team",
+                                "Stunt Department",
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
@@ -919,7 +919,7 @@ const ON_SET_DATA = {
                                 "Art Department",
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
-                                "Stunt Team",
+                                "Stunt Department",
                                 "VFX Post Production Vendor"
                             ],
                             "VFXTypes": [
@@ -954,7 +954,7 @@ const ON_SET_DATA = {
                                 "Art Department",
                                 "Previz Vendor",
                                 "Studio Marketing For Commercial Or Game Creation",
-                                "Stunt Previz Team",
+                                "Stunt Department (previs Team)",
                                 "VFX Post Production Vendor",
                                 "Virtual Production Department / Icvfx"
                             ],
@@ -1165,7 +1165,7 @@ const ON_SET_DATA = {
                                 "Asc Media Hash List (mhl)",
                                 "Pregrade, Color Decision List (cdl). If Dp / Dit Have Done Single Frame Looks Beyond Standard Cdls Those Should Be Requested For Post Production / DI"
                             ],
-                            "Description": "Used to ensure colour accurate rendering , inline with onset DoP colour decisions.",
+                            "Description": "Used to ensure colour accurate rendering , inline with On-set DoP colour decisions.",
                             "Usage": "Ensure proper colour grading throughout the entire pipeline. In some instances CG integration is easier to composite on a graded image compared to the raw image.",
                             "Scope": [
                                 "Scene",
@@ -1299,7 +1299,7 @@ const ON_SET_DATA = {
                             ],
                             "Consumer": [
                                 "2nd Unit Team",
-                                "Entire Onset Crew To See Director\u2019s Vision",
+                                "Entire On-set Crew To See Director\u2019s Vision",
                                 "Previz Vendor",
                                 "Studio Executives When Pitching Concepts",
                                 "Studio Marketing For Behind The Scenes Content",
@@ -2329,7 +2329,7 @@ const ON_SET_DATA = {
                                 "Motion Capture Vendor",
                                 "VFX Post Production Vendor",
                                 "VFX Production Team",
-                                "VFX Production Team Onset Vendor",
+                                "VFX Production Team On-set Vendor",
                                 "Virtual Production Department - Stage Team"
                             ],
                             "Consumer": [
