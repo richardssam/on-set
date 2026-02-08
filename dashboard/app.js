@@ -361,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Text Blocks (Intro, Ref Docs)
-        if (['Introduction', 'Reference Docs'].includes(sectionName)) {
+        // Text Blocks (Intro, Ref Docs, Feedback)
+        if (['Introduction', 'Reference Docs', 'Feedback'].includes(sectionName)) {
             dom.grid.classList.add('text-view-mode');
             const container = document.createElement('div');
             container.className = 'text-content';

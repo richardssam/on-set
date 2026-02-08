@@ -128,7 +128,8 @@ def parse_google_doc_html(html_path, output_css_path=None):
         "Scope Definitions": [],
         "Data Sets": [],
         "Directory Structure": [], # Will now just be a placeholder or empty in main data
-        "Reference Docs": []
+        "Reference Docs": [],
+        "Feedback": []
     }
     
     current_h1_obj = None
@@ -173,7 +174,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  continue # Skip adding to normal output
 
         if el.name == 'h1':
-            if text in ["Introduction", "Scope Definitions", "17. Reference Documents"]:
+            if text in ["Introduction", "Scope Definitions", "17. Reference Documents", "Feedback"]:
                 if "17." in text: # specific check for Ref docs to normalize key if needed, or just use text
                      current_h1_obj = {"title": "Reference Docs", "special": True}
                 else:
@@ -382,7 +383,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
                         item["VFXTypes"] = target_types
 
     # Post-process Merge HTML blocks
-    for section in ["Introduction", "Reference Docs"]: # Exclude Directory Structure from HTML merge as it is now empty/placeholder
+    for section in ["Introduction", "Reference Docs", "Feedback"]: # Exclude Directory Structure from HTML merge as it is now empty/placeholder
         if output.get(section): # Safely get
             merged_html = f"<div class='text-block-{section.lower().replace(' ', '-')}'>" + "".join([str(x["html"]) for x in output[section] if "html" in x]) + "</div>"
             output[section] = [{"html": merged_html}]
@@ -397,7 +398,8 @@ def parse_google_doc_html(html_path, output_css_path=None):
         "Scope Definitions": output["Scope Definitions"],
         "Data Sets": output["Data Sets"],
         "Directory Structure": output["Directory Structure"],
-        "Reference Docs": output["Reference Docs"]
+        "Reference Docs": output["Reference Docs"],
+        "Feedback": output["Feedback"]
     }
     
     return data, directory_lines

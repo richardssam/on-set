@@ -1,5 +1,8 @@
 # VES On-set VFX Data Collection and usage web site.
 
+> [!NOTE]
+> This project uses a Python virtual environment. Please use `source .venv/bin/activate` or use the python executable at `.venv/bin/python3` when running scripts.
+
 On-set VFX Data Collection and usage web site. This processes the google doc https://docs.google.com/document/d/13TsptYa5uNO52btOw1nat1cLSBG88t27W3BXHBZPvoc/edit?tab=t.0#heading=h.h7s96q27odn9 into a format that is easily filterable, since the document is huge and can be overwhelming.
 
 ## Setup
