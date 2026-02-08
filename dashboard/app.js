@@ -170,6 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Inject Version and Date
+        if (rawData.version && rawData.publishDate) {
+            const versionInfo = document.getElementById('version-info');
+            if (versionInfo) {
+                versionInfo.textContent = `v${rawData.version} | ${rawData.publishDate}`;
+            }
+        }
+
         processSpecs();
         loadStateFromUrl();
         renderFilters();
@@ -231,6 +239,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sectionName === "Directory Structure" && typeof DIRECTORY_DATA !== 'undefined') {
             const treeContainer = document.createElement('div');
             treeContainer.className = 'tree-view-container';
+
+            // Add Control Bar
+            const controls = document.createElement('div');
+            controls.className = 'tree-controls';
+            controls.style.marginBottom = '1rem';
+            controls.style.display = 'flex';
+            controls.style.gap = '1rem';
+            controls.style.justifyContent = 'flex-end';
+
+            // Simple Download Link (Best for HTTP Server)
+            const downloadBtn = document.createElement('a');
+            downloadBtn.className = 'action-btn';
+            downloadBtn.textContent = 'Download YAML';
+            downloadBtn.href = '/data/directory_structure.yaml'; // Absolute path from server root
+            downloadBtn.setAttribute('download', 'directory_structure.yaml');
+            downloadBtn.target = '_blank'; // Force new tab behavior if download fails to trigger
+            downloadBtn.style.textDecoration = 'none';
+            downloadBtn.style.display = 'inline-block';
+
+            const printTreeBtn = document.createElement('button');
+            printTreeBtn.className = 'action-btn';
+            printTreeBtn.textContent = 'Print Tree';
+            printTreeBtn.onclick = () => window.print();
+
+            controls.appendChild(printTreeBtn);
+            controls.appendChild(downloadBtn);
+
+            dom.grid.appendChild(controls);
+
             const rootUl = document.createElement('ul');
             rootUl.className = 'tree-root';
 

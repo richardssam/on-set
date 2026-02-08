@@ -53,7 +53,17 @@ body {
     line-height: 1;
     /* Fix vertical alignment */
     transform: translateY(1px);
-    /* Comparison adjustment */
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.version-info {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    opacity: 0.8;
 }
 
 .app-container {
@@ -522,7 +532,8 @@ h1 {
     .sidebar,
     .top-bar,
     .tab-nav,
-    #filter-container {
+    #filter-container,
+    .tree-controls {
         display: none !important;
     }
 
@@ -538,6 +549,15 @@ h1 {
         z-index: 1000;
         padding-left: 0;
         border-bottom: 2px solid black;
+    }
+
+    .site-header h1 {
+        color: black !important;
+    }
+
+    .version-info {
+        color: black !important;
+        opacity: 1;
     }
 
     /* Tree View Styles */

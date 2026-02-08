@@ -1,0 +1,281 @@
+FINISHING_DIRECTORY:
+- audio:
+  - marketing
+- editorial:
+  - episode_101
+  - marketing
+  - _tobesorted
+- elements
+- image_and_color:
+  - cdls
+  - charts
+  - logos
+  - luts
+  - slates_leaders
+- media:
+  - reference
+  - title_graphics
+- postoffice:
+  - _dropboxes:
+    - editorial_forward:
+      - _Stage
+    - finishing:
+      - _Stage
+    - to_editorial:
+      - _Stage
+  - editorial:
+    - from_editorial
+    - to_editorial
+  - finishing:
+    - from_finishing
+    - to_finishing
+- prod:
+  - admin:
+    - budget
+    - crew
+  - calendar
+  - call_sheets
+  - misc
+  - QC
+  - scripts
+  - spec_sheets
+  - stats
+- reference
+- RENDER
+- SHOTS
+- workarea:
+  - users
+LIVE_ACTION_DTC_VFX_DIRECTORY:
+- assets:
+  - characters:
+    - _characters_template:
+      - concept_art
+      - model
+      - scans_textures
+  - fx
+  - graphics
+  - locations:
+    - _locations_template:
+      - concept_art
+      - model
+      - scans_textures
+      - set_ref
+  - props:
+    - _props_template:
+      - concept_art
+      - model
+      - scans_textures
+  - vehicles:
+    - _vehicles_template:
+      - concept_art
+      - model
+      - scans_textures
+- local:
+  - local_postoffice:
+    - _dropboxes:
+      - ilm
+      - technicolor
+    - inhouse_pulls
+  - local_shottree
+- postoffice:
+  - _dropboxes
+  - inhouse_pulls
+  - marketing
+- reviews:
+  - director
+  - previs
+  - studio
+  - vendor
+  - vfx_sup
+- shoot:
+  - call_sheets
+  - camera_test
+  - cast_list
+  - footage
+  - hdris
+  - lens_grids
+  - mocap
+  - prod_reports
+  - production_reports
+  - set_databases
+  - set_lighting_diagram
+  - set_wrangler_diagrams
+  - shoot_schedule
+  - vfx_shoot_schedule
+  - witness_cams
+- shottree:
+  - _dev
+  - _edit
+  - _finals
+  - _ref
+  - _shotstobesorted
+  - _turnovers
+  - XYZ:
+    - XYZ1000:
+      - elements:
+        - lineup
+        - plates
+        - renders:
+          - comp
+          - outsource
+          - precomp
+        - stills
+        - witness_cam
+      - project:
+        - maya
+        - nuke
+      - versions
+- tech_specs:
+  - cyberscanning_specs
+  - debayer_tests
+  - framing_charts
+  - luts
+  - previs_lens_conversion
+  - vendor_delivery_specs
+- vfx_prod:
+  - admin
+  - assets_physical_inventory
+  - asset_tracking
+  - awards
+  - bidding_packages
+  - contracts
+  - crew
+  - database
+  - edl_publishes
+  - financials
+  - forms_templates
+  - marketing
+  - nda
+  - offices
+  - schedules
+  - sequence_codes
+  - travel
+  - vendors
+- workarea:
+  - prodtech
+  - users
+VFX_DIRECTORY:
+- assets:
+  - characters:
+    - _characters_template:
+      - concept_art
+      - model
+      - scans_textures
+  - fx
+  - graphics
+  - locations:
+    - _locations_template:
+      - concept_art
+      - model
+      - scans_textures
+      - set_ref
+  - props:
+    - _props_template:
+      - concept_art
+      - model
+      - scans_textures
+  - vehicles:
+    - _vehicles_template:
+      - concept_art
+      - model
+      - scans_textures
+- postoffice:
+  - _dropboxes
+  - inhouse_pulls
+  - marketing
+- reviews:
+  - director
+  - previs
+  - studio
+  - vendor
+  - vfx_sup
+- shoot:
+  - call_sheets
+  - camera_test
+  - cast_list
+  - footage
+  - hdris
+  - lens_grids
+  - mocap
+  - prod_reports
+  - production_reports
+  - set_databases
+  - set_lighting_diagram
+  - set_wrangler_diagrams
+  - shoot_schedule
+  - vfx_shoot_schedule
+  - witness_cams
+- shottree:
+  - _dev
+  - _edit
+  - _farm:
+    - vendor_check
+    - wr_nuke_config
+    - wr_nuke_scripts
+  - _finals
+  - _hoarders
+  - _ref
+  - _shotstobesorted
+  - _turnovers
+  - XYZ:
+    - XYZ1000:
+      - elements:
+        - lineup
+        - plates
+        - renders:
+          - comp
+          - outsource
+          - precomp
+        - stills
+        - witness_cam
+      - project:
+        - maya
+        - nuke
+      - stereo
+      - versions
+- tech_specs:
+  - cyberscanning_specs
+  - debayer_tests
+  - framing_charts
+  - luts
+  - previs_lens_conversion
+  - scripts
+  - stereo_finishing
+  - vendor_delivery_specs
+- vfx_prod:
+  - admin:
+    - database
+  - assets_physical_inventory
+  - asset_tracking
+  - awards
+  - bidding_packages
+  - contracts
+  - crew
+  - database
+  - edl_publishes
+  - financials
+  - forms_templates
+  - marketing
+  - nda
+  - offices
+  - schedules
+  - sequence_codes
+  - travel
+  - vendors
+- workarea:
+  - prodtech
+  - users
+VFX_LOCAL:
+- local_postoffice:
+  - _dropboxes:
+    - inhouse_pulls:
+      - to_marvel
+  - editorial:
+    - to_editorial
+  - inhouse_pulls:
+    - from_marvel
+    - to_marvel
+  - workarea:
+    - users
+- local_shottree:
+  - _shotstobesorted

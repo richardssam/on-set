@@ -91,6 +91,25 @@ def parse_google_doc_html(html_path, output_css_path=None):
     with open(html_path, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
 
+    # Extract Version and Date
+    version = "Unknown"
+    publish_date = "Unknown"
+    
+    # Look for the version string in the first few paragraphs
+    # Format appears to be: Version: 1.0.0 - 2026-02-06
+    import re
+    version_pattern = re.compile(r"Version:\s*([\d\.]+)\s*-\s*([\d-]+)")
+    
+    for p in soup.find_all('p', limit=20):
+        text = p.get_text().strip()
+        match = version_pattern.search(text)
+        if match:
+            version = match.group(1)
+            publish_date = match.group(2)
+            break
+            
+    print(f"Found Version: {version}, Date: {publish_date}")
+
     # Extract styles
     style_content = ""
     for style in soup.find_all("style"):
@@ -371,7 +390,17 @@ def parse_google_doc_html(html_path, output_css_path=None):
     # Set placeholder for Directory Structure if not already set or if empty
     output["Directory Structure"] = [{"type": "tree_view"}]
 
-    return output, directory_lines
+    data = {
+        "version": version,
+        "publishDate": publish_date,
+        "Introduction": output["Introduction"],
+        "Scope Definitions": output["Scope Definitions"],
+        "Data Sets": output["Data Sets"],
+        "Directory Structure": output["Directory Structure"],
+        "Reference Docs": output["Reference Docs"]
+    }
+    
+    return data, directory_lines
 
 def clean_tag(tag):
     # 1. Basic cleaning
@@ -433,6 +462,7 @@ def clean_tag(tag):
 import sys
 import argparse
 import urllib.request
+import yaml
 
 def download_google_doc(doc_id, output_path):
     url = f"https://docs.google.com/document/d/{doc_id}/export?format=html"
@@ -501,12 +531,56 @@ if __name__ == "__main__":
             print(f"Found {len(directory_lines)} directory structure lines. Parsing tree...")
             directory_tree = parse_directory_tree(directory_lines)
             
-            # Save to separate file
+            print(f"Found {len(directory_lines)} directory structure lines. Parsing tree...")
+            directory_tree = parse_directory_tree(directory_lines)
+
+            # Save to YAML file (for user consumption)
+            def to_list_based_structure(nodes):
+                if not nodes:
+                    return []
+                
+                result_list = []
+                for node in nodes:
+                    name = node['name']
+                    children = node.get('children', [])
+                    
+                    if children:
+                        # Recursively get list of children
+                        result_list.append({ name: to_list_based_structure(children) })
+                    else:
+                        # Leaf node: Just the name string
+                        result_list.append(name)
+                return result_list
+
+            # The top level directory_tree is a list of Roots.
+            # We want the output to be a Dict of Roots to Lists, OR a List of Roots?
+            # User example: "app: ..." (Dict at top).
+            # My data has multiple roots. So I should probably return a Dict merging them.
+            
+            final_yaml_data = {}
+            for root in directory_tree:
+                name = root['name']
+                children = root.get('children', [])
+                # The root's children should be a list
+                final_yaml_data[name] = to_list_based_structure(children)
+            
+            yaml_output_file = os.path.join(os.path.dirname(output_file), "directory_structure.yaml")
+            
+            # Generate YAML string
+            yaml_content = yaml.dump(final_yaml_data, default_flow_style=False, sort_keys=False, allow_unicode=True)
+
+            with open(yaml_output_file, 'w', encoding='utf-8') as f:
+                f.write(yaml_content)
+            print(f"Directory structure saved to {yaml_output_file}")
+            
+            # Update directory_data.js to include the YAML content as a string
+            # This allows the frontend to trigger a proper download even on file:// protocol
             dir_output_file = os.path.join(os.path.dirname(output_file), "directory_data.js")
             with open(dir_output_file, 'w', encoding='utf-8') as f:
-                dir_js_content = f"const DIRECTORY_DATA = {json.dumps(directory_tree, indent=4)};"
+                dir_js_content = f"const DIRECTORY_DATA = {json.dumps(directory_tree, indent=4)};\n"
+                dir_js_content += f"const DIRECTORY_YAML = {json.dumps(yaml_content)};"
                 f.write(dir_js_content)
-            print(f"Directory data saved to {dir_output_file}")
+            print(f"Directory data (and YAML) saved to {dir_output_file}")
             
         # Ensure the output directory exists
         output_dir = os.path.dirname(output_file)
