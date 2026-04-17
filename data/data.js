@@ -2570,6 +2570,9 @@ const ON_SET_DATA = {
     ],
     "Directory Structure": [
         {
+            "html": "<div class='text-block-directory-structure'><p>The following directory structure is a starting point for a hub tree. We split it into 3:</p><ul><li>FINISHING_DIRECTORY - for media for wrap.</li><li>VFX_DIRECTORY - during VFX production.</li><li>VFX_LOCAL - for vfx work done within the production (not a 3rd party vendor).</li></ul><p>For some of the directory structure naming, please see the Tech-specs document.</p><p>Note, postoffice is where deliveries come in and go out, see the tech-specs document for more detail. Ideally these deliveries are then procedurally copied over to the shottree. If that fails, they should end up in the _shotstobesorted folder.</p></div>"
+        },
+        {
             "type": "tree_view"
         }
     ],

@@ -710,13 +710,6 @@ h1 {
 }
 
 /* Original styles continued */
-.text-block-directory-structure p {
-    margin-bottom: 0 !important;
-    font-family: monospace !important;
-    white-space: pre-wrap;
-    /* or pre, but pre-wrap safer for mobile */
-    line-height: 1.2;
-}
 
 .filter-toggle {
     background: none;
