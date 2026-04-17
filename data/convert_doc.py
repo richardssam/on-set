@@ -137,6 +137,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
     
     # Accumulator for directory lines
     directory_lines = []
+    in_tree = False
     
     # We iterate through all relevant elements in order
     # Note: re.compile matches tags
@@ -166,6 +167,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
              # Also replace non-breaking spaces early to be safe
              raw_text = raw_text.replace('\xa0', ' ')
              if any(char in raw_text for char in ['│', '├', '└']):
+                 in_tree = True
                  # If we encounter tree lines, ensure we stop adding to Reference Docs (or any previous section)
                  # This prevents empty lines or artifacts within the tree from falling back into the previous section.
                  if current_h1_obj and current_h1_obj.get("title") == "Reference Docs":
@@ -174,9 +176,12 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  continue # Skip adding to normal output
 
         if el.name == 'h1':
-            if text in ["Introduction", "Scope Definitions", "17. Reference Documents", "Feedback"]:
+            in_tree = False
+            if text in ["Introduction", "Scope Definitions", "17. Reference Documents", "Feedback"] or "Directory Structure" in text:
                 if "17." in text: # specific check for Ref docs to normalize key if needed, or just use text
                      current_h1_obj = {"title": "Reference Docs", "special": True}
+                elif "Directory Structure" in text:
+                     current_h1_obj = {"title": "Directory Structure", "special": True}
                 else:
                      current_h1_obj = {"title": text, "special": True}
                 current_h2_obj = None
@@ -200,6 +205,9 @@ def parse_google_doc_html(html_path, output_css_path=None):
 
         elif el.name in ['p', 'ul', 'ol']:
             if current_h1_obj and current_h1_obj.get("special"):
+                 if in_tree and current_h1_obj["title"] == "Directory Structure":
+                      continue
+                      
                  # Handle special sections content (Intro, Scope, Ref Docs)
                  target_list = output[current_h1_obj["title"]]
                  
@@ -246,7 +254,7 @@ def parse_google_doc_html(html_path, output_css_path=None):
                  
                  # Check for junk content to ignore/stop
                  text_content = el.get_text().strip()
-                 if "Blank Directory Structure" in text_content or "Blank VFX Vendor Specs" in text_content or text_content == ".":
+                 if "Blank VFX Vendor Specs" in text_content or text_content == ".":
                      continue
                  
                  # Stop capturing if we hit the internal notes section starting with "JF -"
@@ -383,13 +391,14 @@ def parse_google_doc_html(html_path, output_css_path=None):
                         item["VFXTypes"] = target_types
 
     # Post-process Merge HTML blocks
-    for section in ["Introduction", "Reference Docs", "Feedback"]: # Exclude Directory Structure from HTML merge as it is now empty/placeholder
+    for section in ["Introduction", "Reference Docs", "Feedback", "Directory Structure"]:
         if output.get(section): # Safely get
             merged_html = f"<div class='text-block-{section.lower().replace(' ', '-')}'>" + "".join([str(x["html"]) for x in output[section] if "html" in x]) + "</div>"
             output[section] = [{"html": merged_html}]
             
-    # Set placeholder for Directory Structure if not already set or if empty
-    output["Directory Structure"] = [{"type": "tree_view"}]
+    if not output.get("Directory Structure"):
+        output["Directory Structure"] = []
+    output["Directory Structure"].append({"type": "tree_view"})
 
     data = {
         "version": version,

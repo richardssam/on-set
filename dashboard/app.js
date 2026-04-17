@@ -256,6 +256,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Directory Tree
         if (sectionName === "Directory Structure" && typeof DIRECTORY_DATA !== 'undefined') {
+            
+            // Render any HTML intro blocks
+            const textContainer = document.createElement('div');
+            textContainer.className = 'text-content text-view-mode';
+            textContainer.style.marginBottom = '2rem';
+            let hasHtml = false;
+            data.forEach(item => {
+                if (item.html) {
+                    const div = document.createElement('div');
+                    div.innerHTML = item.html;
+                    textContainer.appendChild(div);
+                    hasHtml = true;
+                }
+            });
+            if (hasHtml) dom.grid.appendChild(textContainer);
+
             const treeContainer = document.createElement('div');
             treeContainer.className = 'tree-view-container';
 
